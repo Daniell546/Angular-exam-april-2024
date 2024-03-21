@@ -1,24 +1,21 @@
 const mongoose = require('mongoose');
 
 const perfumeModel = new mongoose.Schema({
-    purpose: {
+    id: {
+        type: Number
+    },
+    name: {
         type: String,
+    },
+    count: {
+        type: Number,
     },
     imageUrl: {
         type: String,
     },
-    location: {
-        type: String,
-    },
-    price: {
-        type: Number,
-    },
-    type: {
-        type: String,
-    },
-    description: {
-        type: String,
-    },
+    creator_id: {
+        type: Number
+    }
 });
 
 const Perfume = mongoose.model('Perfume', perfumeModel);

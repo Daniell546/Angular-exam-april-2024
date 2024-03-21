@@ -1,19 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const propertyManager = require("../managers/perfumeManager");
+const perfumeManager = require("../managers/perfumeManager");
 
-
-
-router.get('/home', async (req, res) => {
-    const properties = await propertyManager.getProperties().lean();
-
-    return properties;
-})
-
-
-
-
-
-
+router.get("/home", async(req, res) => {
+    let perfumes = await perfumeManager.getPerfumes().lean();
+    // console.log("Perfumes: ", perfumes);
+    return perfumes;
+});
 
 module.exports = router;

@@ -11,7 +11,7 @@ export class LoginComponent {
 
   login(form:NgForm) {
 
-    // if(form.invalid) return;
+    if(form.invalid) return;
 
     console.log(form.value);
   }
