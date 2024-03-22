@@ -9,20 +9,20 @@ import { UserRoutingModule } from './user/user-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PerfumesModule } from './perfumes/perfumes.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     UserModule,
-    CoreModule
+    CoreModule,
+    SharedModule,
+    PerfumesModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

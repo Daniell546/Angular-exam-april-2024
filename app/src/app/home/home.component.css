@@ -1,0 +1,47 @@
+h1 {
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+  font-family: "Helvetica", sans-serif;
+  padding: 40px 10px;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.card {
+  display: inline-block;
+  margin: 5px;
+  border: 1px solid #2b415433;
+  height: 450px;
+  width: 300px;
+}
+.perfumeImg {
+  width: 300px;
+}
+
+.brand {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif,
+    sans-serif;
+  display: flex;
+  justify-content: center;
+  font-weight: 300;
+}
+
+.model {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif,
+    sans-serif;
+  display: flex;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.price {
+    margin: 20px 30px;
+    font-family: Helvetica, sans-serif;
+}

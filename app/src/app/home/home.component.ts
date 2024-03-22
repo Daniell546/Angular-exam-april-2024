@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../core/services/api-service.service';
 import { Perfume } from '../core/interfaces/Perfume';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +11,30 @@ import { Perfume } from '../core/interfaces/Perfume';
 })
 export class HomeComponent implements OnInit {
   perfumesList: Perfume[] = [];
-  constructor(private apiService: ApiServiceService) {}
+  constructor(
+    private apiService: ApiServiceService,
+    private activeRoute: ActivatedRoute
+  ) {
+    // let PerfumeObs: Observable<Perfume[]>;
+    // activeRoute.params.subscribe((params) => {
+    //   PerfumeObs = this.apiService.getPerfumes();
+
+    //   PerfumeObs.subscribe((params: Perfume[]) => {
+    //     this.perfumesList = params;
+    //     console.log(this.perfumesList);
+    //   })
+    // });
+  }
 
   ngOnInit(): void {
-    this.apiService.getPerfumes().subscribe((perfumes: Perfume[]) => {
-      this.perfumesList = perfumes;
-      console.log(perfumes);
+    this.apiService.getPerfumes().subscribe({
+      next: (perfumes) => {
+        this.perfumesList = perfumes;
+        console.log(this.perfumesList);
+      },
+      error: (err) => {
+        console.error(`Error occured: ${err.message}`);
+      },
     });
-
-    console.log(this.perfumesList);
   }
 }

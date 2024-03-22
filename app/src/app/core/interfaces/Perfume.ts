@@ -4,4 +4,6 @@ export interface Perfume {
     count: number;
     imageUrl: string;
     creator_id: number;
+    model: string;
+    price: number;
 }

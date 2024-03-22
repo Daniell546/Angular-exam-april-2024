@@ -14,7 +14,14 @@ const perfumeModel = new mongoose.Schema({
         type: String,
     },
     creator_id: {
-        type: Number
+        type: Number,
+    },
+    model:{
+        type: String,
+    },
+    price: {
+        type: Number,
+        minLength: 0
     }
 });
 
