@@ -13,6 +13,13 @@ export class ApiServiceService {
 
   getPerfumes() {
     const {appUrl} = environment;
-    return this.http.get<Perfume[]>('http://localhost:3000/home')
+    return this.http.get<Perfume[]>(`${appUrl}/home`)
+  }
+
+  createPerfume(perfumeData: Perfume) {
+    const {appUrl} = environment;
+    return this.http.post<Perfume>(`${appUrl}/perfumes/create`, {
+      perfumeData
+    })
   }
 }
