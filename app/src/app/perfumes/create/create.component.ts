@@ -21,7 +21,7 @@ export class CreateComponent {
     this.apiService.createPerfume(form.value).subscribe(() => {
       //! Fix the rotation mistake
       console.log('Successful creation!');
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     });
   }
 }

@@ -10,17 +10,21 @@ import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PerfumesModule } from './perfumes/perfumes.module';
+import { PerfumesRoutingModule } from './perfumes/perfumes-routing.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     UserModule,
     CoreModule,
     SharedModule,
-    PerfumesModule
+    PerfumesModule,
+    RouterModule,
+    PerfumesRoutingModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

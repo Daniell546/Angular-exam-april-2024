@@ -1,12 +1,24 @@
 <h1>Our beautiful perfumes</h1>
+<div class="loader" *ngIf="isLoading">
+  <app-loader />
+</div>
 
-<main>
-  <div class="card" *ngFor="let p of perfumesList">
-    <a routerLink="">
-      <img src="{{ p.imageUrl }}" alt="error" width="15%" class="perfumeImg" />
-      <h3 class="model">{{ p.name }}</h3>
-      <h4 class="brand">{{ p.model }}</h4>
-      <div class="price">${{ p.price }}</div>
-    </a>
-  </div>
-</main>
+<div *ngIf="isEmpty">Sorry! Nothing is here...</div>
+
+<div *ngIf="!isLoading">
+  <main>
+    <div class="card" *ngFor="let p of perfumesList">
+      <a routerLink="">
+        <img
+          src="{{ p.imageUrl }}"
+          alt=""
+          onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
+          class="perfumeImg"
+        />
+        <h3 class="model">{{ p.name }}</h3>
+        <h4 class="brand">{{ p.model }}</h4>
+        <div class="price">${{ p.price }}</div>
+      </a>
+    </div>
+  </main>
+</div>

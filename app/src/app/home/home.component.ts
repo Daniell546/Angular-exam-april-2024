@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  isLoading: boolean = true;
+  isEmpty: boolean = false;
   perfumesList: Perfume[] = [];
   constructor(
     private apiService: ApiServiceService,
@@ -18,7 +20,6 @@ export class HomeComponent implements OnInit {
     // let PerfumeObs: Observable<Perfume[]>;
     // activeRoute.params.subscribe((params) => {
     //   PerfumeObs = this.apiService.getPerfumes();
-
     //   PerfumeObs.subscribe((params: Perfume[]) => {
     //     this.perfumesList = params;
     //     console.log(this.perfumesList);
@@ -30,9 +31,17 @@ export class HomeComponent implements OnInit {
     this.apiService.getPerfumes().subscribe({
       next: (perfumes) => {
         this.perfumesList = perfumes;
-        console.log(this.perfumesList);
+
+        console.log("List: " + this.perfumesList.length);
+        
+        if (this.perfumesList.length > 0) {
+          this.isLoading = false;
+        } else {
+          this.isEmpty = true;
+        }
       },
       error: (err) => {
+        this.isLoading = false;
         console.error(`Error occured: ${err.message}`);
       },
     });
