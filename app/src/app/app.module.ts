@@ -25,9 +25,12 @@ import { CookieModule } from 'ngx-cookie';
     CookieModule.forRoot(),
     SharedModule,
     PerfumesModule,
+
     RouterModule,
     PerfumesRoutingModule,
+    UserRoutingModule,
     AppRoutingModule,
+
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',

@@ -6,4 +6,5 @@ export interface Perfume {
     creator_id: number;
     model: string;
     price: number;
+    description: string;
 }

@@ -17,8 +17,15 @@ export class UserService {
     // private toastrService: ToastrService
   ) {}
 
-  registerUser(userData: User) {
+  registerUser(userData: User): Observable<any> {
     const { appUrl } = environment;
-    return this.http.post<User>(`${appUrl}/user/register`, userData)
+    return this.http.post<User>(`${appUrl}/user/register`, userData).pipe(
+      tap({
+        next: (data) => {
+          console.log(data);
+          
+        }
+      })
+    )
   }
 }

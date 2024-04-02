@@ -25,6 +25,10 @@ const perfumeModel = new mongoose.Schema({
         type: Number,
         minLength: 0,
     },
+    description: {
+        required: true,
+        type: String,
+    },
     owner: {
         // required: true,
         type: mongoose.Types.ObjectId,

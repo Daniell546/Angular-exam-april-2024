@@ -23,13 +23,15 @@
 }
 
 .input-container input,
+.input-container textarea,
 .form button {
   outline: none;
   border: 1px solid #e5e7eb;
   margin: 8px 0;
 }
 
-.input-container input {
+.input-container input,
+.input-container textarea {
   background-color: #fff;
   padding: 1rem;
   padding-right: 3rem;
@@ -55,6 +57,17 @@
   color: #9ca3af;
   width: 1rem;
   height: 1rem;
+}
+
+textarea{
+  resize: none;
+  background-color: #fff;
+  font-size: 0.875rem;
+  /* line-height: 1.25rem; */
+  width: 300px;
+  height: 40px;
+  /* border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); */
 }
 
 .submit {

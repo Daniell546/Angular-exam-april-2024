@@ -95,7 +95,26 @@
     </ng-container>
   </div>
 
-  <button class="submit" [disabled]="form.invalid" [style]="{ backgroundColor: form.invalid ? 'grey': 'blue'}">Create</button>
+  <div class="input-container">
+    <textarea
+      name="description"
+      id="description"
+      placeholder="description"
+      ngModel
+      #inputDescription="ngModel"
+      required
+      minlength="10"
+    >
+    </textarea>
+  </div>
+
+  <button
+    class="submit"
+    [disabled]="form.invalid"
+    [style]="{ backgroundColor: form.invalid ? 'grey' : 'blue' }"
+  >
+    Create
+  </button>
 
   <p class="signup-link">
     <a routerLink="/home">Return to home</a>

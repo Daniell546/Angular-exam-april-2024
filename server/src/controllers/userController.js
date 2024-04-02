@@ -18,15 +18,15 @@ const TOKEN_KEY = "authToken";
 // });
 
 //TODO  Register requests
+router.get('/register', (req, res) => {
+    res.send('register')
+})
 
 router.post("/register", async (req, res) => {
     const userData = req.body;
     userData.email = userData.email.toLowerCase();
     try {
         const token = await userManager.register(userData);
-        res.cookie(TOKEN_KEY, token, {
-            httpOnly: true,
-        });
         res.status(200).send(token)
     } catch (err) {
         console.log("Node error: " + err);
