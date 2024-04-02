@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiServiceService } from '../core/services/api-service.service';
+import { ApiService } from '../core/services/api-service.service';
 import { Perfume } from '../core/interfaces/Perfume';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   isEmpty: boolean = false;
   perfumesList: Perfume[] = [];
   constructor(
-    private apiService: ApiServiceService,
+    private apiService: ApiService,
     private activeRoute: ActivatedRoute
   ) {
     // let PerfumeObs: Observable<Perfume[]>;
@@ -31,9 +31,6 @@ export class HomeComponent implements OnInit {
     this.apiService.getPerfumes().subscribe({
       next: (perfumes) => {
         this.perfumesList = perfumes;
-
-        console.log("List: " + this.perfumesList.length);
-        
         if (this.perfumesList.length > 0) {
           this.isLoading = false;
         } else {

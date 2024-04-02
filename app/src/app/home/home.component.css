@@ -16,7 +16,7 @@ a {
 
 main {
   display: inline-block;
-  justify-items: center;
+  /* justify-items: center; */
   text-align: center;
 }
 
@@ -26,6 +26,8 @@ main {
   border: 1px solid #2b415433;
   height: 450px;
   width: 300px;
+  text-align: center;
+
 }
 .perfumeImg {
   width: 300px;

@@ -1,0 +1,11 @@
+<div class="card">
+  <img
+    src="{{ perfume?.imageUrl }}"
+    alt=""
+    onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
+    class="perfumeImg"
+  />
+  <h3 class="model">{{ perfume?.name }}</h3>
+  <h4 class="brand">{{ perfume?.model }}</h4>
+  <div class="price">{{ perfume?.price }} лв.</div>
+</div>

@@ -1,0 +1,33 @@
+.card {
+    display: inline-block;
+    margin: 25px;
+    border: 1px solid #2b415433;
+    height: 450px;
+    width: 300px;
+    text-align: center;
+  
+  }
+  .perfumeImg {
+    width: 300px;
+  }
+  
+  .brand {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif,
+      sans-serif;
+    display: flex;
+    justify-content: center;
+    font-weight: 300;
+  }
+  
+  .model {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif,
+      sans-serif;
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+  }
+  
+  .price {
+    margin: 20px 30px;
+    font-family: Helvetica, sans-serif;
+  }

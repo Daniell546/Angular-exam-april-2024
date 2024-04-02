@@ -8,7 +8,7 @@
 <div *ngIf="!isLoading">
   <main>
     <div class="card" *ngFor="let p of perfumesList">
-      <a routerLink="">
+      <a [routerLink]="p._id">
         <img
           src="{{ p.imageUrl }}"
           alt=""
@@ -17,7 +17,7 @@
         />
         <h3 class="model">{{ p.name }}</h3>
         <h4 class="brand">{{ p.model }}</h4>
-        <div class="price">${{ p.price }}</div>
+        <div class="price">{{ p.price }} лв.</div>
       </a>
     </div>
   </main>

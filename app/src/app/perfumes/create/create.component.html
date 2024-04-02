@@ -17,7 +17,7 @@
       Brand is required!
     </p>
   </ng-container>
-  
+
   <!-- Model -->
   <div class="input-container">
     <input
@@ -54,7 +54,9 @@
     <p class="error" *ngIf="inputAmount.errors?.['required']">
       Amount is required!
     </p>
-    <p class="error" *ngIf="inputAmount.errors?.['min']">Numbers must be positive</p>
+    <p class="error" *ngIf="inputAmount.errors?.['min']">
+      Numbers must be positive
+    </p>
   </ng-container>
 
   <!-- Password -->
@@ -93,9 +95,7 @@
     </ng-container>
   </div>
 
-  <button class="submit" >
-    Create
-  </button>
+  <button class="submit" [disabled]="form.invalid" [style]="{ backgroundColor: form.invalid ? 'grey': 'blue'}">Create</button>
 
   <p class="signup-link">
     <a routerLink="/home">Return to home</a>

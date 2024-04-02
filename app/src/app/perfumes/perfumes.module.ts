@@ -5,18 +5,20 @@ import { RouterModule } from '@angular/router';
 import { PerfumesRoutingModule } from './perfumes-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
+import { CurrPerfumeComponent } from './curr-perfume/curr-perfume.component';
 
 
 
 @NgModule({
   declarations: [
-    CreateComponent
+    CreateComponent,
+    CurrPerfumeComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AppRoutingModule,
     PerfumesRoutingModule,
+    AppRoutingModule,
     FormsModule
   ],
   exports: [

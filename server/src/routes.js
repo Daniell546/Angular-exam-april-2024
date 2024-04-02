@@ -4,10 +4,7 @@ const userController = require('./controllers/userController');
 const perfumeController = require('./controllers/perfumeController');
 
 router.use(homeController);
-// router.use('/user', userController)
+router.use('/user', userController)
 router.use('/perfumes', perfumeController);
-// router.use('*', (req, res) => {
-//     res.render('404');
-// })
 
 module.exports = router;

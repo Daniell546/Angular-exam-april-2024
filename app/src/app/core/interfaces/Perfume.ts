@@ -1,5 +1,5 @@
 export interface Perfume {
-    id: number;
+    _id: string;
     name: string;
     count: number;
     imageUrl: string;

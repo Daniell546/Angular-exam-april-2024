@@ -2,7 +2,7 @@
 <form class="form" #form="ngForm" (ngSubmit)="register(form)">
     <p class="form-title">Sign up your own account</p>
      <div class="input-container">
-       <input placeholder="Enter email" type="email" name="email" #inputEmail="ngModel" ngModel required> <!--[appEmail]="appEmailDomains"-->
+       <input placeholder="Enter email" type="text" name="email" #inputEmail="ngModel" ngModel required> <!--[appEmail]="appEmailDomains"-->
        
    </div>
    <ng-container *ngIf="inputEmail.touched">

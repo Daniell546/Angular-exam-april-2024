@@ -4,9 +4,15 @@ const perfumeManager = require("../managers/perfumeManager");
 
 router.get('/home', async(req, res) => {
     let perfumes = await perfumeManager.getPerfumes().lean();
-    // console.log("Perfumes: ", perfumes);
     res.send(perfumes)
     return perfumes;
 });
+
+router.get('/:perfumeId', async(req, res) => {
+    const id = req.params.perfumeId;
+    const perfume = await perfumeManager.getOnePerfume(id).lean();
+    res.send(perfume);
+    return perfume
+})
 
 module.exports = router;

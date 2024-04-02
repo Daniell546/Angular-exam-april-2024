@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PerfumesModule } from './perfumes/perfumes.module';
 import { PerfumesRoutingModule } from './perfumes/perfumes-routing.module';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -20,11 +22,17 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     UserModule,
     CoreModule,
+    CookieModule.forRoot(),
     SharedModule,
     PerfumesModule,
     RouterModule,
     PerfumesRoutingModule,
     AppRoutingModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      newestOnTop: false
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
