@@ -17,10 +17,11 @@ export class RegisterComponent {
   register(form: NgForm) {
 
     if(form.invalid) return;
+
     
-    this.userService.registerUser(form.value).subscribe((token) => {
-      console.log(token);
-      
+    const {email,phonenumber, password, rePass} = form.value;
+    
+    this.userService.registerUser(email, phonenumber, password, rePass).subscribe(() => {
       this.router.navigate(["/home"])
     })
   }

@@ -1,12 +1,15 @@
 const express = require('express');
-// const cookieParser = require('cookie-parser');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const cookieSecret = process.env.COOKIESECRET || 'SoftUni';
+// const { errorHandler } = require('../utils')
 
+module.exports = (app) => {
+    app.use(express.json());
 
-function expressConfig(app) {
-  app.use(express.json())
-  app.use(express.urlencoded({extended: false}))
-//   app.use(cookieParser());
+    app.use(cookieParser(cookieSecret));
 
-}
+    app.use(express.static(path.resolve(__basedir, 'static')));
 
-module.exports = expressConfig;
+    // app.use(errorHandler(err, req, res, next));
+};

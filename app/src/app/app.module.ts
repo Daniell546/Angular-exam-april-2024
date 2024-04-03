@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,16 +14,17 @@ import { PerfumesModule } from './perfumes/perfumes.module';
 import { PerfumesRoutingModule } from './perfumes/perfumes-routing.module';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
-import { CookieModule } from 'ngx-cookie';
+import { AppInterceptorProvider } from './app-interceptor';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, ErrorComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     UserModule,
     CoreModule,
-    CookieModule.forRoot(),
     SharedModule,
     PerfumesModule,
 
@@ -32,12 +34,12 @@ import { CookieModule } from 'ngx-cookie';
     AppRoutingModule,
 
     ToastrModule.forRoot({
-      timeOut: 10000,
-      positionClass: 'toast-bottom-right',
-      newestOnTop: false
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      newestOnTop: false ,
     })
   ],
-  providers: [],
+  providers: [AppInterceptorProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -6,12 +6,11 @@ const userSchema = new mongoose.Schema(
         email: {
             type: String,
             required: true,
-            unique: [true, "Email already exist..."]
+            unique: [true, "Email already exist..."],
         },
         phonenumber: {
             required: true,
             type: Number,
-            unique: [true, "Phonenumber already exist..."]
         },
         password: {
             required: true,
@@ -25,11 +24,16 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-userSchema.virtual("repeatPasswords").set(function (value) {
-    if (value !== this.password) {
-        throw new mongoose.MongooseError("Passwords missmatch");
-    }
-});
+userSchema.methods = {
+    matchPassword: function (password) {
+        return bcrypt.compare(password, this.password);
+    },
+};
+// userSchema.virtual("rePass").set(function (value) {
+//     if (this.password != value) {
+//         throw new Error("Passwords don't match");
+//     }
+// });
 
 userSchema.pre("save", async function () {
     const hash = await bcrypt.hash(this.password, 10);

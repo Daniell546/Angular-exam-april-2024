@@ -1,13 +1,17 @@
 <header>
   <nav>
-    <ul>
+    <ul *ngIf="!isLoggedIn">
       <li><a routerLink="/">Home</a></li>
-      <li><a routerLink="/perfume/create">Create</a></li>
       <li><a routerLink="/login">Login</a></li>
       <li><a routerLink="/register">Register</a></li>
-      <li><a routerLink="/logout">Logout</a></li>
+    </ul>
+    <ul *ngIf="isLoggedIn">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/perfume/create">Create</a></li>
+      <li (click)="logout()"><a>Logout</a></li>
       <li><a routerLink="/profile">User</a></li>
     </ul>
-    <a routerLink="/cart"><i class="gg-shopping-cart"></i></a>
+    <a *ngIf="isLoggedIn" routerLink="/cart"><i class="gg-shopping-cart"></i></a>
+
   </nav>
 </header>

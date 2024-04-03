@@ -22,21 +22,7 @@ const SECRET = "ThatIsMyBestSecret";
 //     return token;
 // };
 
-// exports.register = async ({email, phonenumber, password}) => {
-//     const user = await User.findOne({ email });
 
-//     if (user) {
-//         throw new Error("Email already exist");
-//     }
-
-//     console.log("Userdata: " + email, phonenumber, password);
-
-//     const createdUser = await User.create({email});
-//     console.log("Created User: " + createdUser);
-
-//     const token = await generateToken(createdUser);
-//     return token;
-// };
 
 exports.register = async (userData) => {
     const user = await User.findOne({email: userData.email})
@@ -44,7 +30,6 @@ exports.register = async (userData) => {
     if(user) {
         throw new Error("Email already exist")
     }
-
 
     const createdUser = await User.create(userData)
     const token = generateToken(createdUser);
