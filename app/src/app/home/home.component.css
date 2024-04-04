@@ -30,6 +30,11 @@ main {
   text-align: center;
 
 }
+
+.card:active{
+  transform: scale(0.90);
+  transition-duration: 0.5s;
+}
 .perfumeImg {
   width: 300px;
 }

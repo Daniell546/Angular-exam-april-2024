@@ -4,9 +4,10 @@ import { User } from '../core/interfaces/User';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
+
 const USER_KEY = 'auth';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService implements OnDestroy {
   private user$$ = new BehaviorSubject<User | undefined>(undefined);
@@ -25,6 +26,8 @@ export class UserService implements OnDestroy {
       this.user = user;
     })
   }
+
+
 
   registerUser(
     email: string,

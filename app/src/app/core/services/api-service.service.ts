@@ -26,4 +26,10 @@ export class ApiService {
     const { appUrl } = environment;
     return this.http.get<Perfume>(`${appUrl}/${id}`);
   }
+
+  editPerfume(id:string | undefined, newData: Perfume) {
+    const { appUrl } = environment;
+    
+    return this.http.put<Perfume>(`${appUrl}/perfumes/${id}/edit`, newData);
+  }
 }

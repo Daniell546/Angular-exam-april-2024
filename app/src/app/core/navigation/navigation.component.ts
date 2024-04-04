@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/user/user.service';
 
@@ -7,7 +7,7 @@ import { UserService } from 'src/app/user/user.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
 })
-export class NavigationComponent {
+export class NavigationComponent{
   constructor(private userService: UserService, private router: Router) {}
 
   get isLoggedIn(): boolean {
@@ -24,4 +24,8 @@ export class NavigationComponent {
       },
     });
   }
+
+
+
+
 }

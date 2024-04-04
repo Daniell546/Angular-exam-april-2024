@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { CurrPerfumeComponent } from './curr-perfume/curr-perfume.component';
 import { AuthActivate } from '../core/guards/auth.activate';
 import { ErrorComponent } from '../error/error.component';
+import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
   {
@@ -21,9 +22,13 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
+        path: ':perfumeId/edit',
+        component: EditComponent
+      },
+      {
         path: ':perfumeId',
         component: CurrPerfumeComponent
-      }
+      },
     ]
   },
 ];

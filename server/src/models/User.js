@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema(
             required: true,
             type: String,
         },
+        owner_id: {
+            type: mongoose.Types.ObjectId,
+            ref: "User",
+        },
     },
     {
         toJSON: { virtuals: true },

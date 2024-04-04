@@ -3,7 +3,7 @@ const app = require("express")();
 require("dotenv").config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const cookieSecret = process.env.COOKIESECRET || 'SoftUni';
+const cookieSecret = process.env.COOKIESECRET || "SoftUni";
 
 const routes = require("./routes");
 const expressConfig = require("./config/expressConfig");
@@ -24,7 +24,7 @@ dbConfig()
 
 // app.use(cookieParser(cookieSecret));
 // app.use(auth);
-app.use('/api', routes);
+app.use("/api", routes);
 
 app.listen(3000, console.log(`Listening on port ${config.port}!`));
 
