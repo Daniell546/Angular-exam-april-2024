@@ -45,6 +45,17 @@ userSchema.pre("save", async function () {
     this.password = hash;
 });
 
+userSchema.pre("findOneAndUpdate", async function (next) {
+    const update = this.getUpdate();
+    
+    // Check if the password field is being modified
+    if (update.password) {
+        const hash = await bcrypt.hash(update.password, 10);
+        update.password = hash;
+    }
+
+    next();
+});
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

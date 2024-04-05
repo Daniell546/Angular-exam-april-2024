@@ -5,21 +5,10 @@ const TokenBlacklist = require("../models/TokenBlackList");
 const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET || "SoftSecret";
 const { authCookieName } = require("../app-config");
+const perfumeManager = require("../managers/perfumeManager");
+const bcrypt = require("bcrypt");
 
 //  Login requests
-
-// router.post("/login", async (req, res) => {
-//   const { email, password } = req.body;
-
-//   try {
-//     const token = await userManager.login(email, password);
-
-//     res.cookie(TOKEN_KEY, token);
-
-//   } catch (err) {
-
-//   }
-// });
 
 router.post("/login", (req, res) => {
     const { email, password } = req.body;
@@ -78,7 +67,7 @@ router.post("/register", async (req, res) => {
                     secure: true,
                 });
             } else {
-                res.cookie(authCookieName, token, { httpOnly: true });
+                res.cookie(authCookieName, token,{ httpOnly: true });
             }
             res.status(200).send(createdUser);
         })
@@ -88,7 +77,7 @@ router.post("/register", async (req, res) => {
 });
 
 function createToken(data) {
-    return jwt.sign(data, secret, { expiresIn: "1d" });
+    return jwt.sign(data, secret, { expiresIn: "2d" });
 }
 const bsonToJson = (data) => {
     return JSON.parse(JSON.stringify(data));
@@ -107,4 +96,25 @@ router.post("/logout", (req, res) => {
             res.status(400).send(err.message);
         });
 });
+
+router.post('/profile', async(req, res) => {
+    const owner = req.body;
+    const perfumes = await perfumeManager.getByUser(owner)
+    res.send(perfumes)
+    return perfumes
+})
+
+router.post('/editProfile', async (req, res) => {
+    console.log(req.body.creator);
+    const newUser = req.body.user;
+    const oldUser = req.body.creator;
+
+    // const hash = await bcrypt.hash(newUser, 10);
+
+    // newUser.password = hash;
+
+    const edited = await userManager.editProfile(oldUser.id, newUser)
+    res.send(edited);
+    return edited;
+})
 module.exports = router;

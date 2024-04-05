@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Perfume } from 'src/app/core/interfaces/Perfume';
+import { User } from 'src/app/core/interfaces/User';
 import { ApiService } from 'src/app/core/services/api-service.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-edit',
@@ -15,7 +17,7 @@ export class EditComponent {
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {

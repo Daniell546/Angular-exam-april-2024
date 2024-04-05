@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { AppInterceptorProvider } from './app-interceptor';
 import { ErrorComponent } from './error/error.component';
+import { CookieService } from 'ngx-cookie-service';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, ErrorComponent],
@@ -27,12 +29,13 @@ import { ErrorComponent } from './error/error.component';
     CoreModule,
     SharedModule,
     PerfumesModule,
+    CookieModule,
 
     RouterModule,
     PerfumesRoutingModule,
     UserRoutingModule,
     AppRoutingModule,
-
+  
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-right',

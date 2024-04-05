@@ -23,7 +23,8 @@ const routes: Routes = [
       },
       {
         path: ':perfumeId/edit',
-        component: EditComponent
+        component: EditComponent,
+        canActivate: [AuthActivate]
       },
       {
         path: ':perfumeId',

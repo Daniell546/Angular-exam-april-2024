@@ -4,6 +4,19 @@ exports.getPerfumes = () => Perfume.find();
 
 exports.create = (data) => Perfume.create(data);
 
-exports.getOnePerfume = (id) => Perfume.findById(id)
+exports.getOnePerfume = (id) => Perfume.findById(id);
 
-exports.edit = (id, perfume) => Perfume.findByIdAndUpdate(id, perfume)
+exports.edit = (id, perfume) => Perfume.findByIdAndUpdate(id, perfume);
+
+exports.delete = (id) => Perfume.findByIdAndDelete(id);
+
+exports.getByUser = async (owner) => {
+    let all = await Perfume.find().lean();
+    const newArr = [];
+    for(let p of all) {
+        if(p.owner == owner.id) {
+            newArr.push(p)
+        }
+    }
+    return newArr;
+};

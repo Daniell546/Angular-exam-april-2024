@@ -1,14 +1,14 @@
 <form class="form" #formEdit="ngForm" (ngSubmit)="edit(formEdit)">
-  <p class="form-title">Create your own product</p>
+  <p class="form-title">Edit your own product</p>
   <!-- Brand -->
   <div class="input-container">
     <input
-      value="{{ perfume?.name }}"
+      value="{{ perfume?.brand }}"
       placeholder="Enter brand"
       type="text"
-      name="name"
+      name="brand"
       #inputBrand="ngModel"
-      [ngModel]="perfume?.name"
+      [ngModel]="perfume?.brand"
     />
     <!--[appEmail]="appEmailDomains"-->
   </div>
@@ -39,13 +39,14 @@
   <!-- Amount -->
   <div class="input-container">
     <input
-      value="{{ perfume?.count }}"
+      value="{{ perfume?.amount }}"
       placeholder="Enter amount"
       type="number"
-      name="count"
-      [ngModel]="perfume?.count"
+      name="amount"
+      [ngModel]="perfume?.amount"
       #inputAmount="ngModel"
       maxlength="3"
+      required
       min="1"
     />
   </div>
@@ -68,6 +69,7 @@
       name="imageUrl"
       [ngModel]="perfume?.imageUrl"
       #inputImageUrl="ngModel"
+      required
     />
     <ng-container *ngIf="inputImageUrl.touched">
       <p class="error" *ngIf="inputImageUrl.errors?.['required']">
@@ -83,6 +85,7 @@
       type="number"
       name="price"
       [ngModel]="perfume?.price"
+      required
       #inputPrice="ngModel"
     />
     <ng-container *ngIf="inputPrice.touched">
@@ -103,6 +106,7 @@
       placeholder="description"
       #inputDescription="ngModel"
       minlength="10"
+      required
       [ngModel]="perfume?.description"
     >
     </textarea>

@@ -22,7 +22,7 @@ const SECRET = "ThatIsMyBestSecret";
 //     return token;
 // };
 
-
+exports.editProfile = (id, newData) => User.findByIdAndUpdate(id, newData)
 
 exports.register = async (userData) => {
     const user = await User.findOne({email: userData.email})

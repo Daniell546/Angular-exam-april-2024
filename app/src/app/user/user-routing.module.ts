@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthActivate]
+    // canActivate: [AuthActivate]
   },
   
 ];

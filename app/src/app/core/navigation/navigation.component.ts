@@ -11,7 +11,7 @@ export class NavigationComponent{
   constructor(private userService: UserService, private router: Router) {}
 
   get isLoggedIn(): boolean {
-    return this.userService.isLogged;
+    return this.userService.isLogged
   }
 
   logout(): void {

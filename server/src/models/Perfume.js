@@ -4,29 +4,29 @@ const perfumeModel = new mongoose.Schema({
     id: {
         type: Number,
     },
-    name: {
+    brand: {
         type: String,
-        required: true,
+        // required: true,
     },
-    count: {
-        required: true,
+    model: {
+        // required: true,
+        type: String,
+    },
+    amount: {
+        // required: true,
         type: Number,
     },
     imageUrl: {
-        required: true,
-        type: String,
-    },
-    model: {
-        required: true,
+        // required: true,
         type: String,
     },
     price: {
-        required: true,
+        // required: true,
         type: Number,
         minLength: 0,
     },
     description: {
-        required: true,
+        // required: true,
         type: String,
     },
     owner: {

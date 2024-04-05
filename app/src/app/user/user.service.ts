@@ -4,30 +4,25 @@ import { User } from '../core/interfaces/User';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-
 const USER_KEY = 'auth';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService implements OnDestroy {
   private user$$ = new BehaviorSubject<User | undefined>(undefined);
-
   user$ = this.user$$.asObservable();
   user: User | undefined;
-
-  get isLogged(): boolean {
-    return !!this.user;
-  }
 
   subscription: Subscription;
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {
+    //get subscription from Observable and set user
     this.subscription = this.user$.subscribe((user) => {
       this.user = user;
-    })
+    });
   }
 
-
+  checkIfLooged() {}
 
   registerUser(
     email: string,
@@ -35,13 +30,12 @@ export class UserService implements OnDestroy {
     password: string,
     rePass: string
   ) {
-    
     return this.http
       .post<User>(`/api/user/register`, {
         email,
         phonenumber,
         password,
-        rePass
+        rePass,
       })
       .pipe(
         tap({
@@ -69,8 +63,6 @@ export class UserService implements OnDestroy {
         tap({
           next: (user) => {
             this.user$$.next(user);
-            console.log(this.user$$.value);
-            
             this.toastrService.success(
               `Welcome ${user.email}!`,
               'Log in Successful'
@@ -97,7 +89,28 @@ export class UserService implements OnDestroy {
     );
   }
 
+  getUser() {
+    return this.user;
+  }
+
+  editProfile(user: User | undefined, creator: User | undefined) {
+    return this.http
+      .post<User>(`/api/user/editProfile`, { user, creator })
+      .pipe(
+        tap({
+          next: () => {
+            this.toastrService.success('Edit profile Successful');
+          },
+          error: (errorResponse) => {
+            this.toastrService.error(errorResponse.error, 'Edit profile error');
+          },
+        })
+      );
+  }
+  get isLogged(): boolean {
+    return !!this.user;
+  }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
 }

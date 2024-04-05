@@ -9,7 +9,7 @@
       class="perfumeImg"
     />
     <div class="name">
-      <h3 class="brand">{{ perfume?.name }}</h3>
+      <h3 class="brand">{{ perfume?.brand }}</h3>
       <h4 class="model">{{ perfume?.model }}</h4>
     </div>
     <div class="price">Price: {{ perfume?.price }} лв.</div>
@@ -19,8 +19,12 @@
     {{ perfume?.description }}
   </div>
   <div class="cart">
-    <a [routerLink]="['edit']"><button class="EditBtn"> Edit</button></a>
-    <button class="CartBtn">
+    <a routerLink="/"><button class="returnBtn">Back</button></a>
+    <a *ngIf="isCreator"><button (click)="deletePerfume()" class="returnBtn">Delete</button></a>
+
+    <a *ngIf="isCreator" [routerLink]="['edit']"><button class="EditBtn"> Edit</button></a>
+
+    <button *ngIf="isAuth" class="CartBtn" (click)="addToCart(perfume)">
       <span class="IconContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"

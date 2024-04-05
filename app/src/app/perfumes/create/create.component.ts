@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/core/interfaces/User';
 import { ApiService } from 'src/app/core/services/api-service.service';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-create',
@@ -9,16 +11,25 @@ import { ApiService } from 'src/app/core/services/api-service.service';
   styleUrls: ['./create.component.css'],
 })
 export class CreateComponent {
-  constructor(private apiService: ApiService, private router: Router) {}
+  user: User | undefined;
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   create(form: NgForm) {
     if (form.invalid) {
       return;
     }
-  
-    this.apiService.createPerfume(form.value).subscribe(() => {
-      this.router.navigate(['/home'])
-    });
+
+    this.user = this.userService.getUser();
+
+    const { brand, model, amount, imageUrl, price, description } = form.value;
+    this.apiService
+      .createPerfume(brand, model, amount, imageUrl, price, description, this.user)
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+      });
   }
-  
 }

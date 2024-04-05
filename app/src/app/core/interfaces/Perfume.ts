@@ -1,9 +1,9 @@
 export interface Perfume {
     _id: string;
-    name: string;
-    count: number;
+    brand: string;
+    amount: number;
     imageUrl: string;
-    creator_id: number;
+    owner: string;
     model: string;
     price: number;
     description: string;
