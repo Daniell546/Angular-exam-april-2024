@@ -8,30 +8,36 @@ h1 {
   justify-content: center;
 }
 
-.message {
-  display: flex;
-  justify-content: center;
-  font-size: 1.3rem;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-form {
+.form {
   margin: auto;
   margin-top: 50px;
-  margin-bottom: 40px;
   background-color: #d3d3d3;
   display: block;
   padding: 1rem;
   max-width: 365px;
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
+
+.form-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
+}
+.input-container {
+  position: relative;
+}
+
 .input-container input,
 .form button {
   outline: none;
   border: 1px solid #e5e7eb;
   margin: 8px 0;
 }
+
 .input-container input {
   background-color: #fff;
   padding: 1rem;
@@ -43,13 +49,24 @@ form {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
+.input-container span {
+  display: grid;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  place-content: center;
+}
+
 .submit {
   display: block;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  background-color: #4F46E5;
+  background-color: #4f46e5;
   color: #ffffff;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -57,13 +74,6 @@ form {
   width: 100%;
   border-radius: 0.5rem;
   text-transform: uppercase;
-}
-
-a {
-  list-style: none;
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
 }
 
 main {
@@ -88,7 +98,7 @@ main {
 }
 
 .card:hover {
-  transform: scale(0.90);
+  transform: scale(0.9);
   transition-duration: 0.5s;
 }
 .perfumeImg {
@@ -116,12 +126,9 @@ main {
   font-family: Helvetica, sans-serif;
 }
 
-.error {
-  padding: 0%;
-  margin: 0%;
-  color: rgb(217, 37, 37);
-  font-size: large;
-  font-family: Arial, Helvetica, sans-serif;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-align: center;
+a {
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
 }

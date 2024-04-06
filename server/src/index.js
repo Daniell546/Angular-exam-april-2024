@@ -18,7 +18,7 @@ app.use(
     })
 );
 dbConfig()
-    .then(() => console.log("DB connected!"))
+    .then(() => console.log("DB connected successfuly!"))
     .catch((err) => console.log("DB error! ", err.message));
 
 

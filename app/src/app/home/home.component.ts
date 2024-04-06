@@ -16,16 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private activeRoute: ActivatedRoute
-  ) {
-    // let PerfumeObs: Observable<Perfume[]>;
-    // activeRoute.params.subscribe((params) => {
-    //   PerfumeObs = this.apiService.getPerfumes();
-    //   PerfumeObs.subscribe((params: Perfume[]) => {
-    //     this.perfumesList = params;
-    //     console.log(this.perfumesList);
-    //   })
-    // });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.apiService.getPerfumes().subscribe({
@@ -38,7 +29,9 @@ export class HomeComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.isLoading = false;
+        // this.isLoading = false;
+        this.isEmpty = true;
+
         console.error(`Error occured: ${err.message}`);
       },
     });

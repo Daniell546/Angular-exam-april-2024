@@ -4,14 +4,18 @@ import { CreateComponent } from './create/create.component';
 import { HomeComponent } from '../home/home.component';
 import { CurrPerfumeComponent } from './curr-perfume/curr-perfume.component';
 import { AuthActivate } from '../core/guards/auth.activate';
-import { ErrorComponent } from '../error/error.component';
 import { EditComponent } from './edit/edit.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
     path: 'perfume/create',
     component: CreateComponent,
     canActivate: [AuthActivate]
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
   },
   {
     path: 'home',

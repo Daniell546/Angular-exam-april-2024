@@ -106,14 +106,21 @@ router.post("/profile", auth(), async (req, res) => {
 
 router.post("/editProfile", auth(), async (req, res) => {
     try {
-        console.log(req.body.creator);
         const newUser = req.body.user;
         const oldUser = req.body.creator;
+        if(newUser.password == undefined || newUser.password == '') {
+            throw new Error('Write your new password!')
+        }
+
+        if(newUser.phonenumber == undefined || newUser.phonenumber == '') {
+            throw new Error('Write your new phone number!')
+        }
     
         const email = newUser.email;
         const user = await User.findOne({email}).lean();
-    
-        if(user) {
+        console.log(user.email );
+        console.log(oldUser.email);
+        if(user && user.email!=oldUser.email) {
             throw new Error('User already exist!')
         }
     
@@ -127,7 +134,6 @@ router.post("/editProfile", auth(), async (req, res) => {
 });
 
 router.get("/profile", auth(), (req, res, next) => {
-    console.log("Req user profile: " + req.user);
     const { _id } = req.user;
     User.findOne(_id, { password: 0, __v: 0 }) //finding by Id and returning without password and __v
         .then((user) => {

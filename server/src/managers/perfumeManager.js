@@ -20,3 +20,16 @@ exports.getByUser = async (owner) => {
     }
     return newArr;
 };
+
+
+exports.search = async (brand) => {
+    let all = await Perfume.find().lean()
+    const newArr = [];
+    for(let p of all) {
+        if(p.brand.toLocaleLowerCase().includes(brand.toLocaleLowerCase())) {
+            newArr.push(p)
+        }
+    }
+
+    return newArr;
+}

@@ -13,6 +13,6 @@ import { LoaderComponent } from './loader/loader.component';
   imports: [
     CommonModule
   ],
-  exports: [LoaderComponent]
+  exports: [LoaderComponent, AppEmailDirective]
 })
 export class SharedModule { }

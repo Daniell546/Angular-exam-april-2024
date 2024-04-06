@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CurrPerfumeComponent } from './curr-perfume/curr-perfume.component';
 import { CartComponent } from './cart/cart.component';
 import { EditComponent } from './edit/edit.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -14,7 +15,8 @@ import { EditComponent } from './edit/edit.component';
     CreateComponent,
     CurrPerfumeComponent,
     CartComponent,
-    EditComponent
+    EditComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

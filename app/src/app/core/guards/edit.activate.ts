@@ -26,7 +26,7 @@ export class AuthActivate implements CanActivate {
     
     if (this.userService.isLogged) return true;
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/cart']);
     return false;
   }
 }

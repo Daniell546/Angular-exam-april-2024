@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  public perfumeList: Perfume[] | undefined;
+  appEmailDomains = ["bg", "com"];
 
   isLoading: boolean = true;
   isEmpty: boolean = false;
@@ -31,7 +31,7 @@ export class ProfileComponent {
     this.apiService.getPerfumesByCreator(this.creator).subscribe({
       next: (p) => {
         this.perfumesList = p;
-        if(this.perfumesList.length < 0) {
+        if (this.perfumesList.length < 0) {
           this.isEmpty = true;
         }
         this.isLoading = false;
@@ -44,18 +44,15 @@ export class ProfileComponent {
   }
 
   fetchUser() {
-    this.creator = this.userService.user!;
-    console.log(this.creator);
-    
+    this.creator = this.userService.getUser();
   }
 
   editProfile(form: NgForm) {
+    if (form.invalid) return;
 
-    if(form.invalid) return;
-  
     this.userService.editProfile(form.value, this.creator).subscribe(() => {
-      this.userService.logOutUser().subscribe()
-      this.router.navigate(['/'])
-    })
+      this.userService.logOutUser().subscribe();
+      this.router.navigate(['/']);
+    });
   }
 }

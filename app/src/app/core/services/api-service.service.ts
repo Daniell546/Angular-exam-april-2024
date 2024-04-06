@@ -91,4 +91,9 @@ export class ApiService {
     const { appUrl } = environment;
     return this.http.post<Perfume[]>(`/api/user/profile`, owner);
   }
+
+  search(brand: string) {
+    const { appUrl } = environment;
+    return this.http.get<Perfume[]>(`${appUrl}/search/${brand}`);
+  }
 }

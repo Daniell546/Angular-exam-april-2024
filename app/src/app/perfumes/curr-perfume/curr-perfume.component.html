@@ -24,7 +24,7 @@
 
     <a *ngIf="isCreator" [routerLink]="['edit']"><button class="EditBtn"> Edit</button></a>
 
-    <button *ngIf="isAuth" class="CartBtn" (click)="addToCart(perfume)">
+    <button *ngIf="canAddToCart" class="CartBtn" (click)="addToCart()">
       <span class="IconContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"

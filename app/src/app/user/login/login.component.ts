@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  appEmailDomains = ['bg', 'com'];
+
   constructor(private userService: UserService, private router: Router) {}
 
   login(form: NgForm) {
@@ -16,10 +18,8 @@ export class LoginComponent {
 
     const { email, password } = form.value;
 
-
     this.userService.loginUser(email, password).subscribe(() => {
-      this.router.navigate(["/home"])
-
-    })
+      this.router.navigate(['/home']);
+    });
   }
 }

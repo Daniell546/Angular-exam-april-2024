@@ -1,0 +1,32 @@
+<h1>Search page</h1>
+
+<form class="form" #formSearch="ngForm" (ngSubmit)="search(formSearch)">
+  <div class="input-container">
+    <input
+      placeholder="Search by brand"
+      type="text"
+      name="brand"
+      ngModel
+      #inputSearch="ngModel"
+      required
+    />
+  </div>
+  <button class="submit">Search</button>
+</form>
+
+
+<main *ngIf="perfumesList">
+    <div class="card" *ngFor="let p of perfumesList">
+      <a [routerLink]="['/home', p._id]">
+        <img
+          src="{{ p.imageUrl }}"
+          alt=""
+          onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
+          class="perfumeImg"
+        />
+        <h3 class="model">{{ p.brand }}</h3>
+        <h4 class="brand">{{ p.model }}</h4>
+        <div class="price">{{ p.price }} лв.</div>
+      </a>
+    </div>
+  </main>

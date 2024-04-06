@@ -15,13 +15,10 @@ import { PerfumesRoutingModule } from './perfumes/perfumes-routing.module';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { AppInterceptorProvider } from './app-interceptor';
-import { ErrorComponent } from './error/error.component';
-import { CookieService } from 'ngx-cookie-service';
-import { CookieModule } from 'ngx-cookie';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ErrorComponent, AuthenticateComponent],
+  declarations: [AppComponent, HomeComponent, AuthenticateComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,7 +27,6 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     CoreModule,
     SharedModule,
     PerfumesModule,
-    CookieModule,
 
     RouterModule,
     PerfumesRoutingModule,
@@ -40,7 +36,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',
-      newestOnTop: false ,
+      newestOnTop: false,
     })
   ],
   providers: [AppInterceptorProvider],

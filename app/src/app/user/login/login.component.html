@@ -9,8 +9,8 @@
       #inputEmail="ngModel"
       required
       ngModel
+      [appEmail]="appEmailDomains"
     />
-    <!--[appEmail]="appEmailDomains"-->
     <span>
       <svg
         stroke="currentColor"
@@ -43,7 +43,7 @@
       ngModel
       #inputPassword="ngModel"
       required
-      minlength="6"
+      minlength="5"
     />
 
     <span>
@@ -73,7 +73,8 @@
       Password is required!
     </p>
     <p class="error" *ngIf="inputPassword.errors?.['minlength']">
-      Password must have at least 6 characters!
+      Password must be at least
+      {{inputPassword.errors?.['minlength']['requiredLength']}} characters!
     </p>
   </ng-container>
   <button class="submit" type="submit">Sign in</button>

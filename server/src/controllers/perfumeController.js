@@ -10,7 +10,7 @@ router.post("/create", auth(), async (req, res) => {
     return createdPerfume;
 });
 
-router.put("/:perfumeId/edit", auth(),  async (req, res) => {
+router.put("/:perfumeId/edit", async (req, res) => {
     const id = req.params.perfumeId;
     const newData = req.body;
     const perfume = await perfumeManager.edit(id, newData);

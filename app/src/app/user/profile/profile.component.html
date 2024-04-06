@@ -13,11 +13,21 @@
         name="email"
         type="email"
         ngModel
+        [ngModel]="creator?.email"
         #inputEmail="ngModel"
         required
-        [ngModel]="creator?.email"
+        [appEmail]="appEmailDomains"
+
       />
     </div>
+    <ng-container *ngIf="inputEmail.touched">
+      <p class="error" *ngIf="inputEmail.errors?.['required']">
+        Email is required!
+      </p>
+      <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']">
+        Email is not valid!
+      </p>
+    </ng-container>
     <div class="input-container">
         <label for="phonenumber">Phonenumber</label>
       <input
@@ -27,9 +37,14 @@
         [ngModel]="creator?.phonenumber"
         #inputTel="ngModel"
         required
-        maxlength="15"
       />
     </div>
+    <ng-container *ngIf="inputTel.touched">
+      <p class="error" *ngIf="inputTel.errors?.['required']">
+        Phonenumber is required!
+      </p>
+      
+    </ng-container>
     <div class="input-container">
       <label for="password">Password</label>
       <input
@@ -39,9 +54,18 @@
         type="password"
         [ngModel]
         #inputPassword="ngModel"
-        minlength="6"
+        required
+        minlength="5"
       />
     </div>
+    <ng-container *ngIf="inputPassword.touched">
+      <p class="error" *ngIf="inputPassword.errors?.['required']">
+        Password is required!
+      </p>
+      <p class="error" *ngIf="inputPassword.errors?.['minlength']">
+        {{inputPassword.errors?.['minlength']['requiredLength']}} characters!
+      </p>
+    </ng-container>
     <button class="submit">Edit</button>
   </form>
   <div class="message">
