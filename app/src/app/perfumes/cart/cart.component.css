@@ -44,7 +44,7 @@ li img {
   object-fit: cover;
 }
 
-li div a {
+li div button {
   color: black;
 }
 
@@ -121,7 +121,7 @@ li .remove-button:hover {
   color: grey;
 }
 
-.checkout a {
+.checkout button {
   padding: 1rem;
   color: white;
   background-color: #ca3434;
@@ -133,9 +133,43 @@ li .remove-button:hover {
   justify-self: center;
 }
 
-.checkout a:hover {
+.checkout button:hover {
   opacity: 1;
   transform: scale(0.95);
   transition-duration: 0.5s;
   cursor: pointer;
 }
+
+.empty{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  background: #fbca1f;
+  font-family: inherit;
+  padding: 0.6em 1.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.1em 0.1em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a:hover {
+  color: blue;
+}
+

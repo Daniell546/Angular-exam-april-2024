@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from '../core/services/api-service.service';
 import { Perfume } from '../core/interfaces/Perfume';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
   isEmpty: boolean = false;
   perfumesList: Perfume[] = [];
   constructor(
     private apiService: ApiService,
-    private activeRoute: ActivatedRoute
   ) {}
 
+  private subscription: Subscription | undefined;
   ngOnInit(): void {
-    this.apiService.getPerfumes().subscribe({
+    this.subscription = this.apiService.getPerfumes().subscribe({
       next: (perfumes) => {
         this.perfumesList = perfumes;
         if (this.perfumesList.length > 0) {
@@ -35,5 +35,10 @@ export class HomeComponent implements OnInit {
         console.error(`Error occured: ${err.message}`);
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+    }
   }
 }

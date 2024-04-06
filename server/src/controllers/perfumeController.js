@@ -19,7 +19,7 @@ router.put("/:perfumeId/edit", async (req, res) => {
 });
 
 
-router.delete('/:perfumeId/delete', auth(), async (req, res) => {
+router.delete('/:perfumeId/delete', async (req, res) => {
     const id = req.params.perfumeId;
     const deletedPerfume = await perfumeManager.delete(id)
     res.send(deletedPerfume);
