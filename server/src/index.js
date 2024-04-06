@@ -9,7 +9,6 @@ const routes = require("./routes");
 const expressConfig = require("./config/expressConfig");
 const dbConfig = require("./config/dbConfig");
 const config = require("./config/config");
-const { auth } = require("./midddlewares/authMiddleware");
 
 expressConfig(app);
 app.use(

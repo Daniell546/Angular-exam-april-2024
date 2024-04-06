@@ -20,11 +20,11 @@ const routes: Routes = [
     component: CartComponent,
     canActivate: [AuthActivate],
   },
-  // {
-  //   path: '**',
-  //   // component: ErrorComponent,
-  //   redirectTo: '/home'
-  // },
+  {
+    path: '**',
+    // component: ErrorComponent,
+    redirectTo: '/home'
+  },
 ];
 
 @NgModule({

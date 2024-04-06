@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET || "SoftSecret";
 const { authCookieName } = require("../app-config");
 const perfumeManager = require("../managers/perfumeManager");
-const bcrypt = require("bcrypt");
+const { auth } = require("../utils");
 
 //  Login requests
 
@@ -50,16 +50,16 @@ router.post("/login", (req, res) => {
 router.post("/register", async (req, res) => {
     const { email, phonenumber, password, rePass } = req.body;
     try {
-        if(password != rePass) {
-            throw new Error ('Passwords dont match!')
+        if (password != rePass) {
+            throw new Error("Passwords dont match!");
         }
     } catch (error) {
-        return res.status(400).send(error.message)
+        return res.status(400).send(error.message);
     }
     return User.create({ email, phonenumber, password, rePass })
         .then((createdUser) => {
             createdUser = bsonToJson(createdUser);
-            const token = createToken({ id: createToken._id });
+            const token = createToken({ id: createdUser._id });
             if (process.env.NODE_ENV === "production") {
                 res.cookie(authCookieName, token, {
                     httpOnly: true,
@@ -67,7 +67,7 @@ router.post("/register", async (req, res) => {
                     secure: true,
                 });
             } else {
-                res.cookie(authCookieName, token,{ httpOnly: true });
+                res.cookie(authCookieName, token, { httpOnly: true });
             }
             res.status(200).send(createdUser);
         })
@@ -82,8 +82,8 @@ function createToken(data) {
 const bsonToJson = (data) => {
     return JSON.parse(JSON.stringify(data));
 };
-//  Log out
 
+//  Log out
 router.post("/logout", (req, res) => {
     const token = req.cookies[authCookieName];
     TokenBlacklist.create({ token })
@@ -97,24 +97,42 @@ router.post("/logout", (req, res) => {
         });
 });
 
-router.post('/profile', async(req, res) => {
+router.post("/profile", auth(), async (req, res) => {
     const owner = req.body;
-    const perfumes = await perfumeManager.getByUser(owner)
-    res.send(perfumes)
-    return perfumes
-})
+    const perfumes = await perfumeManager.getByUser(owner);
+    res.send(perfumes);
+    return perfumes;
+});
 
-router.post('/editProfile', async (req, res) => {
-    console.log(req.body.creator);
-    const newUser = req.body.user;
-    const oldUser = req.body.creator;
+router.post("/editProfile", auth(), async (req, res) => {
+    try {
+        console.log(req.body.creator);
+        const newUser = req.body.user;
+        const oldUser = req.body.creator;
+    
+        const email = newUser.email;
+        const user = await User.findOne({email}).lean();
+    
+        if(user) {
+            throw new Error('User already exist!')
+        }
+    
+        const edited = await userManager.editProfile(oldUser.id, newUser);
+        res.send(edited);
+        return edited;
+        
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+});
 
-    // const hash = await bcrypt.hash(newUser, 10);
-
-    // newUser.password = hash;
-
-    const edited = await userManager.editProfile(oldUser.id, newUser)
-    res.send(edited);
-    return edited;
-})
+router.get("/profile", auth(), (req, res, next) => {
+    console.log("Req user profile: " + req.user);
+    const { _id } = req.user;
+    User.findOne(_id, { password: 0, __v: 0 }) //finding by Id and returning without password and __v
+        .then((user) => {
+            res.status(200).json(user);
+        })
+        .catch(next);
+});
 module.exports = router;

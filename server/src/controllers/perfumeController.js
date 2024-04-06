@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const perfumeManager = require("../managers/perfumeManager");
-const auth = require("../midddlewares/authMiddleware");
+const { auth } = require("../utils");
 
-router.post("/create", async (req, res) => {
+router.post("/create", auth(), async (req, res) => {
     const data = { ...req.body };
     const createdPerfume = await perfumeManager.create(data);
     res.status(200).send(createdPerfume);
     return createdPerfume;
 });
 
-router.put("/:perfumeId/edit", async (req, res) => {
+router.put("/:perfumeId/edit", auth(),  async (req, res) => {
     const id = req.params.perfumeId;
     const newData = req.body;
     const perfume = await perfumeManager.edit(id, newData);
@@ -19,7 +19,7 @@ router.put("/:perfumeId/edit", async (req, res) => {
 });
 
 
-router.delete('/:perfumeId/delete', async (req, res) => {
+router.delete('/:perfumeId/delete', auth(), async (req, res) => {
     const id = req.params.perfumeId;
     const deletedPerfume = await perfumeManager.delete(id)
     res.send(deletedPerfume);

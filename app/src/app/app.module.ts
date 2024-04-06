@@ -18,9 +18,10 @@ import { AppInterceptorProvider } from './app-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { CookieService } from 'ngx-cookie-service';
 import { CookieModule } from 'ngx-cookie';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ErrorComponent],
+  declarations: [AppComponent, HomeComponent, ErrorComponent, AuthenticateComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,8 +38,8 @@ import { CookieModule } from 'ngx-cookie';
     AppRoutingModule,
   
     ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-top-right',
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
       newestOnTop: false ,
     })
   ],

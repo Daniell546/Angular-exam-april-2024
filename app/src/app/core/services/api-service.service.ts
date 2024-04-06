@@ -28,7 +28,7 @@ export class ApiService {
   ) {
     const { appUrl } = environment;
     return this.http
-      .post<Perfume>(`${appUrl}/perfumes/create`, {
+      .post<Perfume>(`/api/perfumes/create`, {
         brand,
         model,
         amount,
@@ -89,6 +89,6 @@ export class ApiService {
 
   getPerfumesByCreator(owner: User | undefined) {
     const { appUrl } = environment;
-    return this.http.post<Perfume[]>(`${appUrl}/user/profile`, owner);
+    return this.http.post<Perfume[]>(`/api/user/profile`, owner);
   }
 }

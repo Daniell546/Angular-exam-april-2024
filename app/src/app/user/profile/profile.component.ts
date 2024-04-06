@@ -44,7 +44,7 @@ export class ProfileComponent {
   }
 
   fetchUser() {
-    this.creator = this.userService.getUser();
+    this.creator = this.userService.user!;
     console.log(this.creator);
     
   }

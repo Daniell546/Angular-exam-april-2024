@@ -10,7 +10,7 @@ const USER_KEY = 'auth';
 })
 export class UserService implements OnDestroy {
   private user$$ = new BehaviorSubject<User | undefined>(undefined);
-  user$ = this.user$$.asObservable();
+  public user$ = this.user$$.asObservable();
   user: User | undefined;
 
   subscription: Subscription;
@@ -21,8 +21,6 @@ export class UserService implements OnDestroy {
       this.user = user;
     });
   }
-
-  checkIfLooged() {}
 
   registerUser(
     email: string,
@@ -75,8 +73,13 @@ export class UserService implements OnDestroy {
       );
   }
 
+  getProfile() {
+    return this.http
+      .get<User>('/api/user/profile')
+      .pipe(tap((user) => this.user$$.next(user)));
+  }
   logOutUser() {
-    return this.http.post(`/api/user/logout`, {}).pipe(
+    return this.http.post<User>(`/api/user/logout`, {}).pipe(
       tap({
         next: () => {
           this.user$$.next(undefined);
@@ -98,7 +101,8 @@ export class UserService implements OnDestroy {
       .post<User>(`/api/user/editProfile`, { user, creator })
       .pipe(
         tap({
-          next: () => {
+          next: (user) => {
+            this.user$$.next(user);
             this.toastrService.success('Edit profile Successful');
           },
           error: (errorResponse) => {

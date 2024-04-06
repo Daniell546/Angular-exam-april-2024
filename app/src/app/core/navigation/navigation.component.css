@@ -1,5 +1,4 @@
 * {
-  
   margin: 0;
   padding: 5;
   box-sizing: border-box;
@@ -7,7 +6,7 @@
   color: #fff;
   /* background-image: url(./images/Untitled.png); */
 }
-header{
+header {
   width: 100%;
   position: absolute;
   height: 60px;
@@ -43,13 +42,16 @@ nav ul li a {
 a {
   box-sizing: border-box;
   border-radius: 15%;
-  margin: 10px; 
+  margin: 10px;
 }
 a:hover {
-background-color: rgb(90, 94, 94);
+  box-sizing: border-box;
+  width: fit-content;
+  border-radius: 5%;
+  background-color: rgb(103, 72, 72);
 }
 
-a  {
+a {
   display: flex;
   text-align: center;
   justify-content: center;
