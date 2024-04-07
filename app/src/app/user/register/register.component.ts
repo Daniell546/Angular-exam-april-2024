@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
-  // appEmailDomains = DEFAULT_EMAIL_DOMAINS;
+  appEmailDomains = ['bg', 'com'];
   constructor(private userService: UserService, private router: Router) {}
 
 

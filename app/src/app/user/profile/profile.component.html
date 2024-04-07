@@ -3,7 +3,7 @@
   <app-loader />
 </div>
 
-<div class="userInfo">
+<div class="userInfo" *ngIf="!isLoading">
   <form #userForm="ngForm" (ngSubmit)="editProfile(userForm)">
     <div class="input-container">
       <label for="email">Email</label>
@@ -53,8 +53,8 @@
         name="password"
         type="password"
         [ngModel]
-        #inputPassword="ngModel"
         required
+        #inputPassword="ngModel"
         minlength="5"
       />
     </div>

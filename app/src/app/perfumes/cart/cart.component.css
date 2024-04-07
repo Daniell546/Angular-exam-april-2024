@@ -84,6 +84,10 @@ li .remove-button:hover {
   cursor: pointer;
 }
 
+li div a {
+  color: black;
+}
+
 .checkout {
   display: flex;
   flex-direction: column;
@@ -151,7 +155,7 @@ li .remove-button:hover {
   font-size: 20px;
 }
 
-a {
+.addItems {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -169,7 +173,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+.addItems:hover {
   color: blue;
 }
 

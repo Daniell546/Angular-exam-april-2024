@@ -14,7 +14,7 @@ export class CartService {
 
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
-  addToCart(perfume: Perfume | undefined): void {
+  addToCart(perfume: Perfume): void {
     let cartItem = this.cart.items.find((item) => {
       
       return item.perfume._id === perfume?._id;

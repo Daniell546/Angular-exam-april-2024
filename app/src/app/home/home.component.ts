@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        // this.isLoading = false;
         this.isEmpty = true;
 
         console.error(`Error occured: ${err.message}`);

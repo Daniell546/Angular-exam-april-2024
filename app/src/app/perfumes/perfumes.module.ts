@@ -7,6 +7,7 @@ import { CurrPerfumeComponent } from './curr-perfume/curr-perfume.component';
 import { CartComponent } from './cart/cart.component';
 import { EditComponent } from './edit/edit.component';
 import { SearchComponent } from './search/search.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,6 +22,7 @@ import { SearchComponent } from './search/search.component';
   imports: [
     CommonModule,
     PerfumesRoutingModule,
+    SharedModule,
     FormsModule
   ],
   exports: [

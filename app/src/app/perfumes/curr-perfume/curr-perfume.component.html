@@ -1,10 +1,12 @@
 <h1>Details page</h1>
 
-<div class="card">
+<div *ngIf="isLoading"><app-loader /></div>
+
+<div *ngIf="!isLoading" class="card">
   <div>
     <img
       src="{{ perfume?.imageUrl }}"
-      alt=""
+      loading="eager"
       onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
       class="perfumeImg"
     />
@@ -20,11 +22,15 @@
   </div>
   <div class="cart">
     <a routerLink="/"><button class="returnBtn">Back</button></a>
-    <a *ngIf="isCreator"><button (click)="deletePerfume()" class="returnBtn">Delete</button></a>
+    <a *ngIf="isCreator"
+      ><button (click)="deletePerfume()" class="returnBtn">Delete</button></a
+    >
 
-    <a *ngIf="isCreator" [routerLink]="['edit']"><button class="EditBtn"> Edit</button></a>
+    <a *ngIf="isCreator" [routerLink]="['edit']"
+      ><button class="EditBtn">Edit</button></a
+    >
 
-    <button *ngIf="canAddToCart" class="CartBtn" (click)="addToCart()">
+    <button *ngIf="canAddToCart || isAuth" class="CartBtn" (click)="addToCart()">
       <span class="IconContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"

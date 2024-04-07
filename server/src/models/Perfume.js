@@ -6,31 +6,31 @@ const perfumeModel = new mongoose.Schema({
     },
     brand: {
         type: String,
-        // required: true,
+        required: [true, 'Brand required!'],
     },
     model: {
-        // required: true,
+        required: [true, 'Model required!'],
         type: String,
     },
     amount: {
-        // required: true,
+        required: [true, 'Amount required!'],
         type: Number,
     },
     imageUrl: {
-        // required: true,
+        required: [true, 'ImageUrl required!'],
         type: String,
     },
     price: {
-        // required: true,
+        required: [true, 'Price required!'],
         type: Number,
         minLength: 0,
     },
     description: {
-        // required: true,
+        required: [true, 'Short description required!'],
         type: String,
     },
     owner: {
-        // required: true,
+        required: true,
         type: mongoose.Types.ObjectId,
         ref: "User",
     },

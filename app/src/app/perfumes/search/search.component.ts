@@ -6,21 +6,29 @@ import { ApiService } from 'src/app/core/services/api-service.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
 })
-export class SearchComponent{
+export class SearchComponent {
+  perfumesList: Perfume[] = [];
+  brand: string = '';
+  isLoading: boolean = false;
 
-  perfumesList: Perfume[] = []
+  constructor(private apiService: ApiService) {}
 
-  constructor(private apiService: ApiService){}
   search(form: NgForm) {
-    if(form.invalid) return;
+    this.isLoading = true
+    if (form.invalid) return;
 
-    this.apiService.search(form.value.brand).subscribe((perfumes) => {
-      console.log(perfumes);
-      this.perfumesList = perfumes
+    this.brand = form.value.brand;
+
+    this.apiService.search(this.brand).subscribe({
+      next: (perfumes) => {
+        this.perfumesList = perfumes;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
-
   }
-
 }

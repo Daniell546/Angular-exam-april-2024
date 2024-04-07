@@ -11,22 +11,23 @@
       required
     />
   </div>
-  <button class="submit">Search</button>
+  <button [disabled]="formSearch.invalid" class="submit">Search</button>
 </form>
 
+<div *ngIf="isLoading"><app-loader /></div>
 
-<main *ngIf="perfumesList">
-    <div class="card" *ngFor="let p of perfumesList">
-      <a [routerLink]="['/home', p._id]">
-        <img
-          src="{{ p.imageUrl }}"
-          alt=""
-          onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
-          class="perfumeImg"
-        />
-        <h3 class="model">{{ p.brand }}</h3>
-        <h4 class="brand">{{ p.model }}</h4>
-        <div class="price">{{ p.price }} лв.</div>
-      </a>
-    </div>
-  </main>
+<main *ngIf="!isLoading">
+  <div class="card" *ngFor="let p of perfumesList">
+    <a [routerLink]="['/home', p._id]">
+      <img
+        src="{{ p.imageUrl }}"
+        alt=""
+        onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
+        class="perfumeImg"
+      />
+      <h3 class="model">{{ p.brand }}</h3>
+      <h4 class="brand">{{ p.model }}</h4>
+      <div class="price">{{ p.price }} лв.</div>
+    </a>
+  </div>
+</main>

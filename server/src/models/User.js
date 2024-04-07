@@ -5,15 +5,15 @@ const userSchema = new mongoose.Schema(
     {
         email: {
             type: String,
-            required: true,
+            required: [true, "Email is required!"],
             unique: [true, "Email already exist..."],
         },
         phonenumber: {
-            required: true,
+            required: [true, "Phonenumber is required!"],
             type: Number,
         },
         password: {
-            required: true,
+            required: [true, "Password is required!"],
             type: String,
         },
         owner_id: {
@@ -47,7 +47,7 @@ userSchema.pre("save", async function () {
 
 userSchema.pre("findOneAndUpdate", async function (next) {
     const update = this.getUpdate();
-    
+
     // Check if the password field is being modified
     if (update.password) {
         const hash = await bcrypt.hash(update.password, 10);

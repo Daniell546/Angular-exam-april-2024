@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
-  appEmailDomains = ["bg", "com"];
+  appEmailDomains = ['bg', 'com'];
 
   isLoading: boolean = true;
   isEmpty: boolean = false;
@@ -28,19 +28,21 @@ export class ProfileComponent {
   ngOnInit(): void {
     this.fetchUser();
 
-    this.apiService.getPerfumesByCreator(this.creator).subscribe({
-      next: (p) => {
-        this.perfumesList = p;
-        if (this.perfumesList.length < 0) {
-          this.isEmpty = true;
-        }
-        this.isLoading = false;
-      },
-      error: (err: Error) => {
-        this.isLoading = false;
-        console.error(`Error occured: ${err.message}`);
-      },
-    });
+    if (this.creator) {
+      this.apiService.getPerfumesByCreator(this.creator).subscribe({
+        next: (p) => {
+          this.perfumesList = p;
+          if (this.perfumesList.length <= 0) {
+            this.isEmpty = true;
+          }
+          this.isLoading = false;
+        },
+        error: (err: Error) => {
+          this.isLoading = false;
+          console.error(`Error occured: ${err.message}`);
+        },
+      });
+    }
   }
 
   fetchUser() {
@@ -50,9 +52,11 @@ export class ProfileComponent {
   editProfile(form: NgForm) {
     if (form.invalid) return;
 
-    this.userService.editProfile(form.value, this.creator).subscribe(() => {
-      this.userService.logOutUser().subscribe();
-      this.router.navigate(['/']);
-    });
+    if (form.value && this.creator) {
+      this.userService.editProfile(form.value, this.creator).subscribe(() => {
+        this.userService.logOutUser().subscribe();
+        this.router.navigate(['/']);
+      });
+    }
   }
 }

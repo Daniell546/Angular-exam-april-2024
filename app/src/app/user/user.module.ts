@@ -19,10 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     CommonModule,
+    UserRoutingModule,
     SharedModule,
     FormsModule,
     RouterModule,
-    UserRoutingModule,
     HttpClientModule,
   ],
   exports: [

@@ -26,10 +26,20 @@ export class CreateComponent {
     this.user = this.userService.getUser();
 
     const { brand, model, amount, imageUrl, price, description } = form.value;
-    this.apiService
-      .createPerfume(brand, model, amount, imageUrl, price, description, this.user)
-      .subscribe(() => {
-        this.router.navigate(['/home']);
-      });
+    if (this.user) {
+      this.apiService
+        .createPerfume(
+          brand,
+          model,
+          amount,
+          imageUrl,
+          price,
+          description,
+          this.user
+        )
+        .subscribe(() => {
+          this.router.navigate(['/home']);
+        });
+    }
   }
 }

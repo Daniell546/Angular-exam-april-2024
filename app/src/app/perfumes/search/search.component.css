@@ -132,3 +132,11 @@ a {
   color: black;
   cursor: pointer;
 }
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline;
+  color: red;
+}

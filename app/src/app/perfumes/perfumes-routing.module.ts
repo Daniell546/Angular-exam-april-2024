@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { HomeComponent } from '../home/home.component';
 import { CurrPerfumeComponent } from './curr-perfume/curr-perfume.component';
-import { AuthActivate } from '../core/guards/auth.activate';
+import { AuthActivate } from '../core/guards/auth.guard';
 import { EditComponent } from './edit/edit.component';
 import { SearchComponent } from './search/search.component';
 

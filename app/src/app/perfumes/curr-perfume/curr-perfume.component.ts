@@ -15,6 +15,7 @@ export class CurrPerfumeComponent implements OnInit {
   perfume: Perfume | undefined;
   user: User | undefined;
 
+  isLoading: boolean = true;
   isCreator: boolean = false;
   isAuth: boolean = false;
   canAddToCart = true;
@@ -30,7 +31,7 @@ export class CurrPerfumeComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params['perfumeId'];
     this.apiService.getPerfume(id).subscribe((perfume: Perfume) => {
       this.perfume = perfume;
-
+      this.isLoading = false;
       if (this.perfume.owner == this.user?.id) {
         this.isCreator = true;
       }
@@ -51,24 +52,27 @@ export class CurrPerfumeComponent implements OnInit {
 
   deletePerfume() {
     const id = this.activatedRoute.snapshot.params['perfumeId'];
-
-    this.apiService.deletePerfume(id).subscribe({
-      next: () => {
-        this.router.navigate(['/home']);
-      },
-      error: () => {
-        this.router.navigate(['/home']);
-      },
-    });
+    if (id) {
+      this.apiService.deletePerfume(id).subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
+        },
+        error: () => {
+          this.router.navigate(['/home']);
+        },
+      });
+    }
   }
 
   addToCart() {
-    this.cartService.addToCart(this.perfume);
-    this.router.navigate(['/cart']);
+    if (this.perfume) {
+      this.cartService.addToCart(this.perfume);
+      this.router.navigate(['/cart']);
+    }
   }
 
   ngOnInit(): void {
-    this.fetchUser();
     this.fetchPerfume();
+    this.fetchUser();
   }
 }

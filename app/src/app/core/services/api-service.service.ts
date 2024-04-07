@@ -24,9 +24,8 @@ export class ApiService {
     imageUrl: string,
     price: string,
     description: string,
-    owner: User | undefined
+    owner: User
   ) {
-    const { appUrl } = environment;
     return this.http
       .post<Perfume>(`/api/perfumes/create`, {
         brand,
@@ -42,8 +41,9 @@ export class ApiService {
           next: () => {
             this.toastrService.success(`Create successful!`);
           },
-          error: () => {
-            this.toastrService.error(`Create error!`);
+          error: (err) => {
+            console.log(err);
+            this.toastrService.error(err.error.text, `Create error!`);
           },
         })
       );
@@ -54,7 +54,7 @@ export class ApiService {
     return this.http.get<Perfume>(`${appUrl}/${id}`);
   }
 
-  editPerfume(id: string | undefined, newData: Perfume) {
+  editPerfume(id: string, newData: Perfume) {
     const { appUrl } = environment;
 
     return this.http
@@ -64,22 +64,22 @@ export class ApiService {
           next: () => {
             this.toastrService.success(`Edit successful!`);
           },
-          error: () => {
-            this.toastrService.error(`Edit error!`);
+          error: (err) => {
+            this.toastrService.error(err.error.text, `Edit error!`);
           },
         })
       );
   }
 
-  deletePerfume(id: string | undefined) {
+  deletePerfume(id: string) {
     const { appUrl } = environment;
     return this.http.delete<Perfume>(`${appUrl}/perfumes/${id}/delete`).pipe(
       tap({
         next: () => {
           this.toastrService.success(`Delete successful!`);
         },
-        error: () => {
-          this.toastrService.error(`Delete error!`);
+        error: (err) => {
+          this.toastrService.error(err.error.text, `Delete error!`);
         },
       })
     );
@@ -87,7 +87,7 @@ export class ApiService {
 
   addCart(perfume: Perfume) {}
 
-  getPerfumesByCreator(owner: User | undefined) {
+  getPerfumesByCreator(owner: User) {
     const { appUrl } = environment;
     return this.http.post<Perfume[]>(`/api/user/profile`, owner);
   }

@@ -45,7 +45,7 @@ export class UserService implements OnDestroy {
             );
           },
           error: (errorResponse) => {
-            this.toastrService.error(errorResponse.error, 'Register error');
+            this.toastrService.error(errorResponse.error.message, 'Register error');
           },
         })
       );
@@ -67,7 +67,7 @@ export class UserService implements OnDestroy {
             );
           },
           error: (errorResponse) => {
-            this.toastrService.error(errorResponse.error, 'Log in error');
+            this.toastrService.error(errorResponse.error.message, 'Log in error');
           },
         })
       );
@@ -96,7 +96,7 @@ export class UserService implements OnDestroy {
     return this.user;
   }
 
-  editProfile(user: User | undefined, creator: User | undefined) {
+  editProfile(user: User, creator: User) {
     return this.http
       .post<User>(`/api/user/editProfile`, { user, creator })
       .pipe(
@@ -114,6 +114,7 @@ export class UserService implements OnDestroy {
   get isLogged(): boolean {
     return !!this.user;
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

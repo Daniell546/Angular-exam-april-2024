@@ -4,23 +4,7 @@ const jwt = require("../lib/jwt");
 
 const SECRET = "ThatIsMyBestSecret";
 
-// exports.login = async (email, password) => {
-//     const user = await User.findOne({email});
 
-//     if(!user) {
-//         throw new Error('Invalid user or password');
-//     };
-
-//     const isValid = await bcrypt.compare(password, user.password);
-
-//     if(!isValid) {
-//         throw new Error('Invalid user or password');
-//     }
-
-//     const token = await generateToken(user);
-
-//     return token;
-// };
 
 exports.editProfile = (id, newData) => User.findByIdAndUpdate(id, newData)
 

@@ -17,7 +17,7 @@ export class EditComponent {
   constructor(
     private apiService: ApiService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -26,9 +26,11 @@ export class EditComponent {
 
   edit(form: NgForm) {
     if (form.invalid) return;
-    this.apiService.editPerfume(this.id, form.value).subscribe(() => {
-      this.router.navigate(['/home']);
-    });
+    if (this.id) {
+      this.apiService.editPerfume(this.id, form.value).subscribe(() => {
+        this.router.navigate(['/home']);
+      });
+    }
   }
 
   fetchPerfume(): void {

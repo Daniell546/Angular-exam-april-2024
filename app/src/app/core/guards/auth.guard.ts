@@ -8,7 +8,6 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
-import { User } from '../interfaces/User';
 
 @Injectable({ providedIn: 'root' })
 export class AuthActivate implements CanActivate {
@@ -22,11 +21,9 @@ export class AuthActivate implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    const user = this.userService.getUser();
-    
     if (this.userService.isLogged) return true;
 
-    this.router.navigate(['/cart']);
+    this.router.navigate(['/home']);
     return false;
   }
 }

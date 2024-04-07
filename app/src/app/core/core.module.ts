@@ -3,21 +3,11 @@ import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
-
-
+import { AuthActivate } from './guards/auth.guard';
 
 @NgModule({
-  declarations: [
-    NavigationComponent,
-    FooterComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    NavigationComponent,
-     FooterComponent
-  ]
+  declarations: [NavigationComponent, FooterComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [NavigationComponent, FooterComponent],
 })
-export class CoreModule { }
+export class CoreModule {}

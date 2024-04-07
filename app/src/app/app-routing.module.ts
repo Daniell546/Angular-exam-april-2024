@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './perfumes/cart/cart.component';
-import { AuthActivate } from './core/guards/auth.activate';
+import { AuthActivate } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {

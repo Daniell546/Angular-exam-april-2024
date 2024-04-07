@@ -1,7 +1,7 @@
 <h1>Cart</h1>
 <div *ngIf="isEmpty">
   <div class="empty">Sorry, your Cart is empty😔...</div>
-  <a routerLink="/home">Add items</a>
+  <a class="addItems" routerLink="/home">Add items</a>
 </div>
 
 <div *ngIf="cart && cart.items.length" class="container">

@@ -2,8 +2,6 @@ global.__basedir = __dirname;
 const app = require("express")();
 require("dotenv").config();
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const cookieSecret = process.env.COOKIESECRET || "SoftUni";
 
 const routes = require("./routes");
 const expressConfig = require("./config/expressConfig");

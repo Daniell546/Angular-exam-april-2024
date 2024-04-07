@@ -7,10 +7,11 @@ const secret = process.env.SECRET || "SoftSecret";
 const { authCookieName } = require("../app-config");
 const perfumeManager = require("../managers/perfumeManager");
 const { auth } = require("../utils");
-
+const {getErrorMessage} = require('../utils/getErrorMessage');
+const {isGuest} = require('../utils')
 //  Login requests
 
-router.post("/login", (req, res) => {
+router.post("/login", isGuest(),(req, res) => {
     const { email, password } = req.body;
 
     User.findOne({ email })
@@ -43,7 +44,8 @@ router.post("/login", (req, res) => {
             res.status(200).send(user);
         })
         .catch((err) => {
-            res.status(400).send(err.message);
+            console.log(err);
+            return res.status(400).send(getErrorMessage(err));
         });
 });
 
@@ -54,7 +56,7 @@ router.post("/register", async (req, res) => {
             throw new Error("Passwords dont match!");
         }
     } catch (error) {
-        return res.status(400).send(error.message);
+        return res.status(400).send(getErrorMessage(error));
     }
     return User.create({ email, phonenumber, password, rePass })
         .then((createdUser) => {
@@ -72,7 +74,7 @@ router.post("/register", async (req, res) => {
             res.status(200).send(createdUser);
         })
         .catch((err) => {
-            res.status(400).send("Email already exist");
+            res.status(400).send(getErrorMessage(err));
         });
 });
 
@@ -93,15 +95,20 @@ router.post("/logout", (req, res) => {
                 .send({ message: "Logged out!" });
         })
         .catch((err) => {
-            res.status(400).send(err.message);
+            res.status(400).send(getErrorMessage(err));
         });
 });
 
 router.post("/profile", auth(), async (req, res) => {
     const owner = req.body;
-    const perfumes = await perfumeManager.getByUser(owner);
-    res.send(perfumes);
-    return perfumes;
+    try {
+        const perfumes = await perfumeManager.getByUser(owner);
+        res.send(perfumes);
+        return perfumes;
+        
+    } catch (error) {
+        res.send(getErrorMessage(error))
+    }
 });
 
 router.post("/editProfile", auth(), async (req, res) => {
@@ -129,7 +136,7 @@ router.post("/editProfile", auth(), async (req, res) => {
         return edited;
         
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(400).send(getErrorMessage(error))
     }
 });
 
