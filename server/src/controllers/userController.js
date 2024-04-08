@@ -11,7 +11,7 @@ const {getErrorMessage} = require('../utils/getErrorMessage');
 const {isGuest} = require('../utils')
 //  Login requests
 
-router.post("/login", isGuest(),(req, res) => {
+router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
     User.findOne({ email })
@@ -86,13 +86,14 @@ const bsonToJson = (data) => {
 };
 
 //  Log out
-router.post("/logout", (req, res) => {
+router.post("/logout", auth(), (req, res) => {
     const token = req.cookies[authCookieName];
+    console.log(token);
     TokenBlacklist.create({ token })
         .then(() => {
             res.clearCookie(authCookieName)
-                .status(204)
-                .send({ message: "Logged out!" });
+            .status(204)
+            .send({ message: "Logged out!" });
         })
         .catch((err) => {
             res.status(400).send(getErrorMessage(err));

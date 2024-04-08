@@ -3,8 +3,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../core/interfaces/User';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { flush } from '@angular/core/testing';
 
-const USER_KEY = 'auth';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,6 +20,39 @@ export class UserService implements OnDestroy {
     this.subscription = this.user$.subscribe((user) => {
       this.user = user;
     });
+  }
+
+  get isLogged(): boolean {
+    return !!this.user;
+  }
+
+  getUser() {
+    return this.user;
+  }
+
+  loginUser(email: string, password: string) {
+    return this.http
+      .post<User>(`/api/user/login`, {
+        email,
+        password,
+      })
+      .pipe(
+        tap({
+          next: (user) => {
+            this.user$$.next(user);
+            this.toastrService.success(
+              `Welcome ${user.email}!`,
+              'Log in Successful'
+            );
+          },
+          error: (errorResponse) => {
+            this.toastrService.error(
+              errorResponse.error.message,
+              'Log in error'
+            );
+          },
+        })
+      );
   }
 
   registerUser(
@@ -45,29 +78,10 @@ export class UserService implements OnDestroy {
             );
           },
           error: (errorResponse) => {
-            this.toastrService.error(errorResponse.error.message, 'Register error');
-          },
-        })
-      );
-  }
-
-  loginUser(email: string, password: string) {
-    return this.http
-      .post<User>(`/api/user/login`, {
-        email,
-        password,
-      })
-      .pipe(
-        tap({
-          next: (user) => {
-            this.user$$.next(user);
-            this.toastrService.success(
-              `Welcome ${user.email}!`,
-              'Log in Successful'
+            this.toastrService.error(
+              errorResponse.error.message,
+              'Register error'
             );
-          },
-          error: (errorResponse) => {
-            this.toastrService.error(errorResponse.error.message, 'Log in error');
           },
         })
       );
@@ -83,6 +97,7 @@ export class UserService implements OnDestroy {
       tap({
         next: () => {
           this.user$$.next(undefined);
+
           this.toastrService.success(`Log out successful!`);
         },
         error: (errorResponse) => {
@@ -90,10 +105,6 @@ export class UserService implements OnDestroy {
         },
       })
     );
-  }
-
-  getUser() {
-    return this.user;
   }
 
   editProfile(user: User, creator: User) {
@@ -111,11 +122,8 @@ export class UserService implements OnDestroy {
         })
       );
   }
-  get isLogged(): boolean {
-    return !!this.user;
-  }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 }

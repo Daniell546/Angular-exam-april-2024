@@ -42,7 +42,6 @@ export class ApiService {
             this.toastrService.success(`Create successful!`);
           },
           error: (err) => {
-            console.log(err);
             this.toastrService.error(err.error.text, `Create error!`);
           },
         })

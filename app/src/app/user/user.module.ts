@@ -25,9 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     HttpClientModule,
   ],
-  exports: [
-    LoginComponent,
-    RegisterComponent,
-  ]
+  // exports: [
+  //   LoginComponent,
+  //   RegisterComponent,
+  // ]
 })
 export class UserModule { }

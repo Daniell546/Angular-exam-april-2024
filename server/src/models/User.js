@@ -1,32 +1,25 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema(
-    {
-        email: {
-            type: String,
-            required: [true, "Email is required!"],
-            unique: [true, "Email already exist..."],
-        },
-        phonenumber: {
-            required: [true, "Phonenumber is required!"],
-            type: Number,
-        },
-        password: {
-            required: [true, "Password is required!"],
-            type: String,
-        },
-        owner_id: {
-            type: mongoose.Types.ObjectId,
-            ref: "User",
-        },
+const userSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: [true, "Email is required!"],
+        unique: [true, "Email already exist..."],
     },
-    {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
-        timestamps: true,
-    }
-);
+    phonenumber: {
+        required: [true, "Phonenumber is required!"],
+        type: Number,
+    },
+    password: {
+        required: [true, "Password is required!"],
+        type: String,
+    },
+    owner_id: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+    },
+});
 
 userSchema.methods = {
     matchPassword: function (password) {

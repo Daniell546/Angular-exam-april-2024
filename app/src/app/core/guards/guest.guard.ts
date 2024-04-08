@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GuestGuard {
-  constructor(private userService: UserService, private router: Router){
-
-  }
+  constructor(private userService: UserService, private router: Router) {}
   canActivate(
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    if (!this.userService.isLogged) return true;
 
-    if(!this.userService.isLogged) return true;
-
-    this.router.navigate(['/'], {queryParams:{returnUrl: state.url}})
     return false;
   }
 }
