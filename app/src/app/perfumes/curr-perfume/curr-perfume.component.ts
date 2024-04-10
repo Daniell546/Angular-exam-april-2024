@@ -27,22 +27,30 @@ export class CurrPerfumeComponent implements OnInit {
     private cartService: CartService
   ) {}
 
+  ngOnInit(): void {
+    this.fetchUser();
+    this.fetchPerfume();
+  }
   fetchPerfume(): void {
     const id = this.activatedRoute.snapshot.params['perfumeId'];
     this.apiService.getPerfume(id).subscribe((perfume: Perfume) => {
       this.perfume = perfume;
       this.isLoading = false;
-      if (this.perfume.owner == this.user?.id) {
+      
+      if (this.perfume.owner == this.user?._id) {
         this.isCreator = true;
       }
 
       if (this.user) {
         this.isAuth = true;
       } else {
+        this.isAuth = false;
         this.canAddToCart = false;
       }
 
       if (this.isCreator) this.canAddToCart = false;
+
+      
     });
   }
 
@@ -71,8 +79,4 @@ export class CurrPerfumeComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.fetchPerfume();
-    this.fetchUser();
-  }
 }

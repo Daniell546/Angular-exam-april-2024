@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Cart } from '../interfaces/Cart';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Perfume } from '../interfaces/Perfume';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +17,10 @@ export class CartService {
 
   addToCart(perfume: Perfume): void {
     let cartItem = this.cart.items.find((item) => {
-      
       return item.perfume._id === perfume?._id;
     });
 
     if (cartItem) {
-      
       cartItem.quantity++;
       if (perfume) {
         this.changeQuantity(perfume._id, cartItem.quantity);
@@ -78,6 +77,14 @@ export class CartService {
     this.setCartToLocalStorage();
   }
 
+  // editAmount(perfume: Perfume) {
+  //   const { appUrl } = environment;
+
+  //   return this.http.put<Perfume>(
+  //     `${appUrl}/perfumes/${perfume._id}/edit/amount`,
+  //     perfume
+  //   );
+  // }
 
   removeFromCart(perfumeId: string): void {
     this.cart.items = this.cart.items.filter(

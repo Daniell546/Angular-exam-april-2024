@@ -11,7 +11,7 @@ import { CartService } from 'src/app/core/services/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  cart: Cart | undefined;
+  cart!: Cart;
   isEmpty: boolean = true;
   constructor(
     private cartService: CartService,

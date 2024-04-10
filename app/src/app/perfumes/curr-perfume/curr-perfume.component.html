@@ -30,7 +30,7 @@
       ><button class="EditBtn">Edit</button></a
     >
 
-    <button *ngIf="canAddToCart || isAuth" class="CartBtn" (click)="addToCart()">
+    <button *ngIf="!isCreator && isAuth" class="CartBtn" (click)="addToCart()">
       <span class="IconContainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"

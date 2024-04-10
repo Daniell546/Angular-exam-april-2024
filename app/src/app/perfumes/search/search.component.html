@@ -11,7 +11,14 @@
       required
     />
   </div>
-  <button [disabled]="formSearch.invalid" class="submit">Search</button>
+  <ng-container *ngIf="inputSearch.touched">
+    <p class="error" *ngIf="inputSearch.errors?.['required']">
+      Search text is required!
+    </p>
+    
+  </ng-container>
+  <button [disabled]="formSearch.invalid"
+  [style]="{ backgroundColor: formSearch.invalid ? 'grey' : 'blue' }" class="submit">Search</button>
 </form>
 
 <div *ngIf="isLoading"><app-loader /></div>

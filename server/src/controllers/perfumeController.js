@@ -9,11 +9,9 @@ router.post("/create", auth(), async (req, res) => {
     const data = { ...req.body };
     try {
         const createdPerfume = await perfumeManager.create(data);
-        console.log(createdPerfume);
         res.status(200).send(createdPerfume);
         return createdPerfume;
     } catch (error) {
-        console.log(typeof getErrorMessage);
         res.send(getErrorMessage(error));
     }
 });
@@ -30,6 +28,20 @@ router.put("/:perfumeId/edit", async (req, res) => {
         return res.send(getErrorMessage(error))
     }
 });
+
+router.put("/:perfumeId/edit/amount", async(req, res) => {
+    const id = req.params.perfumeId;
+    const amount = req.body.amount;
+    console.log(amount);
+    try {
+        const perfume = await perfumeManager.edit(id, req.body);
+        res.send(perfume);
+        return perfume;
+        
+    } catch (error) {
+        return res.send(getErrorMessage(error))
+    }
+})
 
 router.delete("/:perfumeId/delete", async (req, res) => {
     const id = req.params.perfumeId;

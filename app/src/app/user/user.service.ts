@@ -47,7 +47,7 @@ export class UserService implements OnDestroy {
           },
           error: (errorResponse) => {
             this.toastrService.error(
-              errorResponse.error.message,
+              errorResponse.error,
               'Log in error'
             );
           },
@@ -79,7 +79,7 @@ export class UserService implements OnDestroy {
           },
           error: (errorResponse) => {
             this.toastrService.error(
-              errorResponse.error.message,
+              errorResponse.error,
               'Register error'
             );
           },
@@ -124,6 +124,6 @@ export class UserService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

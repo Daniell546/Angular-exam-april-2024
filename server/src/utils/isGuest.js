@@ -4,8 +4,6 @@ const { authCookieName } = require("../app-config");
 function isGuest(redirect = true) {
     return function (req, res, next) {
         const token = req.cookies[authCookieName];
-        console.log(token);
-
         if (token) {
             try {
                 const decodedUser = verify(token, "ThatIsMyBestSecret");

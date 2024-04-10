@@ -29,8 +29,8 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     PerfumesModule,
 
     RouterModule,
-    // PerfumesRoutingModule,
-    // UserRoutingModule,
+    PerfumesRoutingModule,
+    UserRoutingModule,
     AppRoutingModule,
   
     ToastrModule.forRoot({

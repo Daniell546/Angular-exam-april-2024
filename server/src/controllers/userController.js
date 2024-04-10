@@ -7,13 +7,12 @@ const secret = process.env.SECRET || "SoftSecret";
 const { authCookieName } = require("../app-config");
 const perfumeManager = require("../managers/perfumeManager");
 const { auth } = require("../utils");
-const {getErrorMessage} = require('../utils/getErrorMessage');
-const {isGuest} = require('../utils')
+const { getErrorMessage } = require("../utils/getErrorMessage");
+const { isGuest } = require("../utils");
 //  Login requests
 
 router.post("/login", (req, res) => {
     const { email, password } = req.body;
-
     User.findOne({ email })
         .then((user) => {
             if (!user) {
@@ -44,7 +43,6 @@ router.post("/login", (req, res) => {
             res.status(200).send(user);
         })
         .catch((err) => {
-            console.log(err);
             return res.status(400).send(getErrorMessage(err));
         });
 });
@@ -54,6 +52,11 @@ router.post("/register", async (req, res) => {
     try {
         if (password != rePass) {
             throw new Error("Passwords dont match!");
+        }
+        const user = await User.findOne({email})
+
+        if(user) {
+            throw new Error('User already exist')
         }
     } catch (error) {
         return res.status(400).send(getErrorMessage(error));
@@ -88,12 +91,11 @@ const bsonToJson = (data) => {
 //  Log out
 router.post("/logout", auth(), (req, res) => {
     const token = req.cookies[authCookieName];
-    console.log(token);
     TokenBlacklist.create({ token })
         .then(() => {
             res.clearCookie(authCookieName)
-            .status(204)
-            .send({ message: "Logged out!" });
+                .status(204)
+                .send({ message: "Logged out!" });
         })
         .catch((err) => {
             res.status(400).send(getErrorMessage(err));
@@ -104,11 +106,11 @@ router.post("/profile", auth(), async (req, res) => {
     const owner = req.body;
     try {
         const perfumes = await perfumeManager.getByUser(owner);
+        console.log(perfumes);
         res.send(perfumes);
         return perfumes;
-        
     } catch (error) {
-        res.send(getErrorMessage(error))
+        res.send(getErrorMessage(error));
     }
 });
 
@@ -116,28 +118,25 @@ router.post("/editProfile", auth(), async (req, res) => {
     try {
         const newUser = req.body.user;
         const oldUser = req.body.creator;
-        if(newUser.password == undefined || newUser.password == '') {
-            throw new Error('Write your new password!')
+        if (newUser.password == undefined || newUser.password == "") {
+            throw new Error("Write your new password!");
         }
 
-        if(newUser.phonenumber == undefined || newUser.phonenumber == '') {
-            throw new Error('Write your new phone number!')
+        if (newUser.phonenumber == undefined || newUser.phonenumber == "") {
+            throw new Error("Write your new phone number!");
         }
-    
+
         const email = newUser.email;
-        const user = await User.findOne({email}).lean();
-        console.log(user.email );
-        console.log(oldUser.email);
-        if(user && user.email!=oldUser.email) {
-            throw new Error('User already exist!')
+        const user = await User.findOne({ email }).lean();
+        if (user && user.email != oldUser.email) {
+            throw new Error("User already exist!");
         }
-    
-        const edited = await userManager.editProfile(oldUser.id, newUser);
+
+        const edited = await userManager.editProfile(oldUser._id, newUser);
         res.send(edited);
         return edited;
-        
     } catch (error) {
-        res.status(400).send(getErrorMessage(error))
+        res.status(400).send(getErrorMessage(error));
     }
 });
 

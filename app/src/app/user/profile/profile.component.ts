@@ -28,7 +28,7 @@ export class ProfileComponent {
   ngOnInit(): void {
     this.fetchUser();
 
-    if (this.creator) {
+    if (this.creator) {      
       this.apiService.getPerfumesByCreator(this.creator).subscribe({
         next: (p) => {
           this.perfumesList = p;
@@ -53,6 +53,7 @@ export class ProfileComponent {
     if (form.invalid) return;
 
     if (form.value && this.creator) {
+      
       this.userService.editProfile(form.value, this.creator).subscribe(() => {
         this.userService.logOutUser().subscribe();
         this.router.navigate(['/']);

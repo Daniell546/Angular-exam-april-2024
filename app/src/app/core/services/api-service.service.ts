@@ -84,8 +84,6 @@ export class ApiService {
     );
   }
 
-  addCart(perfume: Perfume) {}
-
   getPerfumesByCreator(owner: User) {
     const { appUrl } = environment;
     return this.http.post<Perfume[]>(`/api/user/profile`, owner);

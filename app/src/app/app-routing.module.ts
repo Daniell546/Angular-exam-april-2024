@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'cart',
     component: CartComponent,
     canActivate: [AuthActivate],
+  },
+  {
+    path: '**',
+    component: HomeComponent
   }
 ];
 

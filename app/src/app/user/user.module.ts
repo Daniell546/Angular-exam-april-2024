@@ -8,6 +8,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserRoutingModule } from './user-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { GuestGuard } from '../core/guards/guest.guard';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -22,12 +24,14 @@ import { HttpClientModule } from '@angular/common/http';
     UserRoutingModule,
     SharedModule,
     FormsModule,
+    CoreModule,
     RouterModule,
     HttpClientModule,
   ],
-  // exports: [
-  //   LoginComponent,
-  //   RegisterComponent,
-  // ]
+  exports: [
+    LoginComponent,
+    RegisterComponent,
+  ],
+  providers: [GuestGuard]
 })
 export class UserModule { }

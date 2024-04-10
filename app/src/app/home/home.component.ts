@@ -30,14 +30,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         this.isEmpty = true;
-
-        console.error(`Error occured: ${err.message}`);
       },
     });
   }
 
   ngOnDestroy(): void {
     if (this.subscription) {
+      this.subscription.unsubscribe()
     }
   }
 }

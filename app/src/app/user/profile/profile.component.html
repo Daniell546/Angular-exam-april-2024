@@ -66,7 +66,8 @@
         {{inputPassword.errors?.['minlength']['requiredLength']}} characters!
       </p>
     </ng-container>
-    <button class="submit">Edit</button>
+    <button class="submit" [disabled]="userForm.invalid"
+    [style]="{ backgroundColor: userForm.invalid ? 'grey' : 'blue' }">Edit</button>
   </form>
   <div class="message">
     These are yours ({{ creator?.email }}'s) perfume posts. If you want to edit
@@ -74,7 +75,7 @@
   </div>
 </div>
 
-<div *ngIf="isEmpty">Sorry! Nothing is here...</div>
+<!-- <div *ngIf="isEmpty">Sorry! Nothing is here...</div> -->
 
 <div *ngIf="!isLoading">
   <main>

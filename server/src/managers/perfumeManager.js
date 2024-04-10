@@ -14,7 +14,7 @@ exports.getByUser = async (owner) => {
     let all = await Perfume.find().lean();
     const newArr = [];
     for(let p of all) {
-        if(p.owner == owner.id) {
+        if(p.owner == owner._id) {
             newArr.push(p)
         }
     }

@@ -112,7 +112,13 @@
     </textarea>
   </div>
 
-  <button class="submit">Edit</button>
+  <button
+    class="submit"
+    [disabled]="formEdit.invalid"
+    [style]="{ backgroundColor: formEdit.invalid ? 'grey' : 'blue' }"
+  >
+    Edit
+  </button>
 
   <p class="signup-link">
     <a routerLink="/home">Return to home</a>
