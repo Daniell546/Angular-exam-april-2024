@@ -67,10 +67,14 @@
       required
       ngModel
       #inputImageUrl="ngModel"
+      appImageUrl
     />
     <ng-container *ngIf="inputImageUrl.touched">
       <p class="error" *ngIf="inputImageUrl.errors?.['required']">
         ImageUrl is required!
+      </p>
+      <p class="error" *ngIf="inputImageUrl.errors?.['appImageUrlValidator']">
+        ImageUrl is incorrect!
       </p>
     </ng-container>
   </div>

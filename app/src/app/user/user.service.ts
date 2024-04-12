@@ -97,7 +97,6 @@ export class UserService implements OnDestroy {
       tap({
         next: () => {
           this.user$$.next(undefined);
-
           this.toastrService.success(`Log out successful!`);
         },
         error: (errorResponse) => {
