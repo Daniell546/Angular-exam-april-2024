@@ -47,6 +47,7 @@ export class CartService {
     cartItem.price = quantity * cartItem.perfume.price;
     this.setCartToLocalStorage();
   }
+  
   private getCartFromLocalStorage(): Cart {
     const cartJson = localStorage.getItem('Cart');
     if (cartJson) {
