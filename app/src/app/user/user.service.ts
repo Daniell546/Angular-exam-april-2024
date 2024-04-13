@@ -3,7 +3,6 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../core/interfaces/User';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { flush } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root',
@@ -46,10 +45,7 @@ export class UserService implements OnDestroy {
             );
           },
           error: (errorResponse) => {
-            this.toastrService.error(
-              errorResponse.error,
-              'Log in error'
-            );
+            this.toastrService.error(errorResponse.error, 'Log in error');
           },
         })
       );
@@ -78,19 +74,18 @@ export class UserService implements OnDestroy {
             );
           },
           error: (errorResponse) => {
-            this.toastrService.error(
-              errorResponse.error,
-              'Register error'
-            );
+            this.toastrService.error(errorResponse.error, 'Register error');
           },
         })
       );
   }
 
   getProfile() {
-    return this.http
-      .get<User>('/api/user/profile')
-      .pipe(tap((user) => this.user$$.next(user)));
+    return this.http.get<User>('/api/user/profile').pipe(
+      tap((user) => {
+        this.user$$.next(user);
+      })
+    );
   }
   logOutUser() {
     return this.http.post<User>(`/api/user/logout`, {}).pipe(

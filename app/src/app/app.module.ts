@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { AppInterceptorProvider } from './app-interceptor';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, AuthenticateComponent],
@@ -28,9 +28,9 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     SharedModule,
     PerfumesModule,
 
-    RouterModule,
-    PerfumesRoutingModule,
+    // RouterModule,
     UserRoutingModule,
+    PerfumesRoutingModule,
     AppRoutingModule,
   
     ToastrModule.forRoot({

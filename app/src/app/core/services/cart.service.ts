@@ -77,15 +77,6 @@ export class CartService {
     this.setCartToLocalStorage();
   }
 
-  // editAmount(perfume: Perfume) {
-  //   const { appUrl } = environment;
-
-  //   return this.http.put<Perfume>(
-  //     `${appUrl}/perfumes/${perfume._id}/edit/amount`,
-  //     perfume
-  //   );
-  // }
-
   removeFromCart(perfumeId: string): void {
     this.cart.items = this.cart.items.filter(
       (item) => item.perfume._id != perfumeId
@@ -95,9 +86,5 @@ export class CartService {
 
   getCartObservable(): Observable<Cart> {
     return this.cartSubject.asObservable();
-  }
-
-  getCart(): Cart {
-    return this.cartSubject.value;
   }
 }

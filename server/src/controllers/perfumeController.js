@@ -32,7 +32,6 @@ router.put("/:perfumeId/edit", async (req, res) => {
 router.put("/:perfumeId/edit/amount", async(req, res) => {
     const id = req.params.perfumeId;
     const amount = req.body.amount;
-    console.log(amount);
     try {
         const perfume = await perfumeManager.edit(id, req.body);
         res.send(perfume);

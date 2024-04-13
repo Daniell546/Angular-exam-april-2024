@@ -17,7 +17,7 @@
         />
         <h3 class="model">{{ p.brand }}</h3>
         <h4 class="brand">{{ p.model }}</h4>
-        <div class="price">{{ p.price }} лв.</div>
+        <div class="price">{{ p.price | currency : "BGN" }}</div>
       </a>
     </div>
   </main>

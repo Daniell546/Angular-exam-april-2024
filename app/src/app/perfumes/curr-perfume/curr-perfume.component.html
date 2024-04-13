@@ -14,7 +14,7 @@
       <h3 class="brand">{{ perfume?.brand }}</h3>
       <h4 class="model">{{ perfume?.model }}</h4>
     </div>
-    <div class="price">Price: {{ perfume?.price }} лв.</div>
+    <div class="price">{{ perfume?.price | currency : "BGN" }}</div>
   </div>
 
   <div class="description">

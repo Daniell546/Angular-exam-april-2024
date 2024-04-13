@@ -53,10 +53,10 @@ router.post("/register", async (req, res) => {
         if (password != rePass) {
             throw new Error("Passwords dont match!");
         }
-        const user = await User.findOne({email})
+        const user = await User.findOne({ email });
 
-        if(user) {
-            throw new Error('User already exist')
+        if (user) {
+            throw new Error("User already exist");
         }
     } catch (error) {
         return res.status(400).send(getErrorMessage(error));
@@ -106,7 +106,6 @@ router.post("/profile", auth(), async (req, res) => {
     const owner = req.body;
     try {
         const perfumes = await perfumeManager.getByUser(owner);
-        console.log(perfumes);
         res.send(perfumes);
         return perfumes;
     } catch (error) {
@@ -144,7 +143,7 @@ router.get("/profile", auth(), (req, res, next) => {
     const { _id } = req.user;
     User.findOne(_id, { password: 0, __v: 0 }) //finding by Id and returning without password and __v
         .then((user) => {
-            res.status(200).json(user);
+            return res.status(200).send(user);
         })
         .catch(next);
 });
