@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "serve": "nodemon src/index.js",
+    "start": "node server/src/index.js"
+  },
   "dependencies": {
     "nodemailer": "^6.9.13"
   }
