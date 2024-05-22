@@ -8,7 +8,7 @@ const { authCookieName } = require("../app-config");
 const perfumeManager = require("../managers/perfumeManager");
 const { auth } = require("../utils");
 const { getErrorMessage } = require("../utils/getErrorMessage");
-const { isGuest } = require("../utils");
+const nodemailer = require('nodemailer');
 //  Login requests
 
 router.post("/login", (req, res) => {
@@ -62,7 +62,7 @@ router.post("/register", async (req, res) => {
         return res.status(400).send(getErrorMessage(error));
     }
     return User.create({ email, phonenumber, password, rePass })
-        .then((createdUser) => {
+        .then(async (createdUser, callback) => {
             createdUser = bsonToJson(createdUser);
             const token = createToken({ id: createdUser._id });
             if (process.env.NODE_ENV === "production") {
@@ -74,6 +74,27 @@ router.post("/register", async (req, res) => {
             } else {
                 res.cookie(authCookieName, token, { httpOnly: true });
             }
+
+            // let transporter = nodemailer.createTransport({
+            //     host: 'smtp.gmail.com',
+            //     port: 465,
+            //     secure: true,
+            //     auth: {
+            //         user: email,
+            //         pass: password,
+            //     }
+            // })
+
+            // console.log('work');
+            // let mailOptions = {
+            //     from: '"Demo"',
+            //     to: 'danitud911@gmail.com',
+            //     subject: 'Demo subject',
+            //     html: `<h1>Hi ${email}</h1>`
+            // }
+
+            // let info = await transporter.sendMail(mailOptions);
+            // callback(info);
             res.status(200).send(createdUser);
         })
         .catch((err) => {

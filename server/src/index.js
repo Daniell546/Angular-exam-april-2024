@@ -22,4 +22,4 @@ dbConfig()
 
 app.use("/api", routes);
 
-app.listen(3000, console.log(`Listening on port ${config.port}!`));
+app.listen(process.env.PORT || 3000, console.log(`Listening on port ${process.env.PORT || 3000}!`));
