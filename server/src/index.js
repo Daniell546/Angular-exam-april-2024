@@ -7,6 +7,7 @@ const routes = require("./routes");
 const expressConfig = require("./config/expressConfig");
 const dbConfig = require("./config/dbConfig");
 const config = require("./config/config");
+const http = require('http').createServer(app);
 
 expressConfig(app);
 app.use(
