@@ -17,7 +17,7 @@ export class ProfileComponent {
   isLoading: boolean = true;
   isEmpty: boolean = false;
   perfumesList: Perfume[] = [];
-  creator!: User | undefined;
+  creator: User | undefined;
 
   constructor(
     private apiService: ApiService,

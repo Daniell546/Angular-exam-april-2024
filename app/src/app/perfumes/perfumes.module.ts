@@ -8,7 +8,7 @@ import { CartComponent } from './cart/cart.component';
 import { EditComponent } from './edit/edit.component';
 import { SearchComponent } from './search/search.component';
 import { SharedModule } from '../shared/shared.module';
-import { ShortenPipe } from './shorten.pipe';
+
 
 
 @NgModule({
@@ -17,15 +17,16 @@ import { ShortenPipe } from './shorten.pipe';
     CurrPerfumeComponent,
     CartComponent,
     EditComponent,
-    SearchComponent,
-    ShortenPipe,
-
+    SearchComponent
   ],
   imports: [
     CommonModule,
     PerfumesRoutingModule,
     SharedModule,
     FormsModule
+  ],
+  exports: [
+    CreateComponent,
   ]
 })
 export class PerfumesModule { }

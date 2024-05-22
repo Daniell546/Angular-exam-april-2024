@@ -28,6 +28,10 @@ import { CoreModule } from '../core/core.module';
     RouterModule,
     HttpClientModule,
   ],
+  exports: [
+    LoginComponent,
+    RegisterComponent,
+  ],
   providers: [GuestGuard]
 })
 export class UserModule { }

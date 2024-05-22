@@ -12,7 +12,7 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./curr-perfume.component.css'],
 })
 export class CurrPerfumeComponent implements OnInit {
-  perfume!: Perfume;
+  perfume: Perfume | undefined;
   user: User | undefined;
 
   isLoading: boolean = true;
@@ -36,6 +36,7 @@ export class CurrPerfumeComponent implements OnInit {
     this.apiService.getPerfume(id).subscribe((perfume: Perfume) => {
       this.perfume = perfume;
       this.isLoading = false;
+      
       if (this.perfume.owner == this.user?._id) {
         this.isCreator = true;
       }
@@ -48,6 +49,8 @@ export class CurrPerfumeComponent implements OnInit {
       }
 
       if (this.isCreator) this.canAddToCart = false;
+
+      
     });
   }
 
@@ -75,4 +78,5 @@ export class CurrPerfumeComponent implements OnInit {
       this.router.navigate(['/cart']);
     }
   }
+
 }

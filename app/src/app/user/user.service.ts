@@ -45,7 +45,7 @@ export class UserService implements OnDestroy {
             );
           },
           error: (errorResponse) => {
-            this.toastrService.error(errorResponse.error.message, 'Log in error');
+            this.toastrService.error(errorResponse.error, 'Log in error');
           },
         })
       );

@@ -5,20 +5,20 @@
 <div *ngIf="!isLoading" class="card">
   <div>
     <img
-      src="{{ perfume.imageUrl }}"
+      src="{{ perfume?.imageUrl }}"
       loading="eager"
       onerror="this.onerror=null; this.src='/assets/images/errorImage.png'"
       class="perfumeImg"
     />
     <div class="name">
-      <h3 class="brand">{{ perfume.brand }}</h3>
-      <h4 class="model">{{ perfume.model }}</h4>
+      <h3 class="brand">{{ perfume?.brand }}</h3>
+      <h4 class="model">{{ perfume?.model }}</h4>
     </div>
-    <div class="price">{{ perfume.price | currency : "BGN" }}</div>
+    <div class="price">{{ perfume?.price | currency : "BGN" }}</div>
   </div>
 
   <div class="description">
-    {{ perfume.description | shorten }}
+    {{ perfume?.description }}
   </div>
   <div class="cart">
     <a routerLink="/"><button class="returnBtn">Back</button></a>

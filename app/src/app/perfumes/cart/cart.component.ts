@@ -23,7 +23,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-  
   changeQuantity(cartItem: CartItem, quantityInString: string) {
     const quantity = Number(quantityInString);
     this.cartService.changeQuantity(cartItem.perfume._id, quantity);
